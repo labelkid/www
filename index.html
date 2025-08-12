@@ -19,7 +19,10 @@
   <meta property="og:title" content="Label Kid — Establish Your Sovereignty" />
   <meta property="og:description" content="Label Kid is the trusted layer for indie music ops — catalog, rights, splits, and data sovereignty. All with privacy and auditability by design. Its about time!" />
   <meta property="og:image" content="https://labelkid.io/lk-mark-01.png" />
-
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Label Kid — Establish Your Sovereignty" />
+  <meta name="twitter:description" content="Label Kid is the trusted layer for indie music ops — catalog, rights, splits, and data sovereignty. All with privacy and auditability by design. Its about time!" />
+  <meta name="twitter:image" content="https://labelkid.io/lk-mark-01.png" />
 
   <!-- Organization Schema -->
   <script type="application/ld+json">
@@ -49,18 +52,15 @@
   <link rel="icon" sizes="512x512" href="/favicon_io/android-chrome-512x512.png" />
 
   <!-- Google tag (gtag.js) -->
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZX2ZY9YQXZ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-ZX2ZY9YQXZ');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZX2ZY9YQXZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-ZX2ZY9YQXZ');
+  </script>
 
   <style>
-    /* Color system (from your palette) */
     :root{
       --ink:#122433;           /* primary dark */
       --paper:#F8F6F2;         /* off-white background */
@@ -78,7 +78,6 @@
       --fieldBg:#0f1c27; --fieldInk:#e9edf1; --fieldBorder:rgba(248,246,242,.20);
     }
 
-    /* Reset + base */
     *{box-sizing:border-box}
     html,body{height:100%;margin:0}
     body{
@@ -91,8 +90,6 @@
       -moz-osx-font-smoothing:grayscale;
     }
     img{max-width:100%;height:auto;display:block}
-
-    /* Layout: centered hero */
     .wrap{min-height:100dvh;display:grid;place-items:center;padding:24px}
     .panel{width:100%;max-width:1280px;display:flex;justify-content:center;align-items:center}
     .container{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}
@@ -102,7 +99,6 @@
     .hero-image{width:602px;max-width:100%;aspect-ratio:1/1}
     .buttons{display:inline-flex;gap:var(--gap-sm);flex-wrap:wrap;align-content:center;position:relative;z-index:1}
 
-    /* Buttons */
     .btn{
       appearance:none;border:0;border-radius:var(--radius);
       padding:12px 18px;cursor:pointer;font-weight:700;line-height:1.45;
@@ -112,6 +108,7 @@
     .btn:active{transform:translateY(1px)}
     .btn-primary{background:var(--brand);color:var(--text-on-dark)}
     .btn-secondary{background:transparent;color:var(--text-on-dark);border:1px solid rgba(248,246,242,.35)}
+    .btn-positive{background:var(--accent-green);color:var(--ink);}
     .btn[disabled]{opacity:.6;pointer-events:none}
 
     /* Tablet */
@@ -128,7 +125,6 @@
     .panel.mobile .hero-image{width:253px}
     .panel.mobile .btn-primary{font-size:13px}
 
-    /* Responsive visibility */
     .panel.desktop{display:none}
     .panel.tablet{display:none}
     .panel.mobile{display:none}
@@ -145,24 +141,23 @@
     }
     .is-open{display:flex; pointer-events:auto}
     .modal{
-      width:100%; max-width:720px;
+      width:100%; max-width:540px;
       background:var(--brand); color:var(--text-on-dark);
       border-radius:var(--radius-lg); box-shadow:0 20px 60px rgba(0,0,0,.25); overflow:hidden;
       z-index:1001;
+      display:flex; flex-direction:column;
     }
 
-    .modal header{padding:24px 28px;border-bottom:1px solid rgba(248,246,242,.08)}
+    .modal header{padding:24px 28px 12px 28px;border-bottom:1px solid rgba(248,246,242,.08)}
     .modal header h2{margin:0;font-size:28px;line-height:1.2}
 
     .modal .modal-body{padding:24px 28px}
     .helper-title{font-size:18px;line-height:1.4;margin:0 0 var(--gap-md);color:#cfd6db}
 
-    /* Form layout */
     form .group{margin-bottom:var(--gap-md)}
     form .group.large-gap{margin-bottom:var(--gap-lg)}
     label.form-label{display:inline-block;margin-bottom:6px;font-size:14px}
     .required-asterisk{color:var(--mustard);margin-left:4px;font-weight:700}
-
     input[type="text"], input[type="email"], select, textarea{
       width:100%;padding:14px 14px;border-radius:10px;font-size:15px;outline:none;
       background:var(--fieldBg);color:var(--fieldInk);border:1px solid var(--fieldBorder)
@@ -180,17 +175,41 @@
     .actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:var(--gap-lg)}
     .actions .left a{color:#cfe07a;text-decoration:underline}
 
-    /* Inline validation */
     .error{color:#ffb3b3;font-size:12px;margin-top:6px;display:none}
     .invalid input, .invalid textarea, .invalid select{border-color:#ff8a8a}
     .invalid .error{display:block}
 
-    /* Success state */
-    .success-pane{display:none;padding:28px}
-    .success-title{font-size:28px;margin:0 0 var(--gap-md)}
-    .success-copy{font-size:18px;margin:0 0 var(--gap-lg)}
+    /* Confirmation success modal */
+    .success-pane{
+      display:none;
+      flex-direction:column;
+      align-items:center;
+      padding:40px 32px;
+      text-align:center;
+      min-height:340px;
+      justify-content:center;
+    }
+    .success-title{
+      font-size:2rem;
+      font-weight:900;
+      margin:0 0 18px 0;
+      letter-spacing:-.01em;
+    }
+    .success-copy{
+      font-size:1.18rem;
+      margin:0 0 38px 0;
+    }
+    .success-actions{
+      width:100%;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+    }
+    .success-actions .btn-positive{
+      min-width:120px;
+      font-size:1rem;
+    }
 
-    /* Ensure modal uses dark scheme (no #fff anywhere) */
     .modal, .modal *{color-scheme:dark}
   </style>
 </head>
@@ -239,94 +258,98 @@
   <!-- Modal -->
   <div id="contactModal" class="modal-backdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
-      <header>
-        <h2 id="contactTitle">Get in touch — Artists first, everyone welcome.</h2>
-      </header>
 
-      <div class="modal-body">
-        <p class="helper-title">What brings you here today? We’ll follow up.</p>
-
-        <form id="contactForm" action="/api/contact" method="POST" novalidate>
-          <!-- Name -->
-          <div class="group large-gap" id="grp-name">
-            <label for="name" class="form-label">Name<span class="required-asterisk">*</span></label>
-            <input id="name" name="name" type="text" autocomplete="name" required />
-            <p class="error">Please enter your name.</p>
-          </div>
-
-          <!-- Email -->
-          <div class="group large-gap" id="grp-email">
-            <label for="email" class="form-label">Email<span class="required-asterisk">*</span></label>
-            <input id="email" name="_replyto" type="email" autocomplete="email" required />
-            <p class="error">Enter a valid email address.</p>
-          </div>
-
-          <!-- Role -->
-          <div class="group large-gap" id="grp-role">
-            <label class="form-label">I am…<span class="required-asterisk">*</span></label>
-            <div class="radio-stack" role="radiogroup" aria-label="I am">
-              <label class="radio-item"><input type="radio" name="role" value="Artist/Creator" required> Artist/Creator</label>
-              <label class="radio-item"><input type="radio" name="role" value="Label/Manager" required> Label/Manager</label>
-              <label class="radio-item"><input type="radio" name="role" value="Investor/Partner" required> Investor/Partner</label>
-              <label class="radio-item"><input type="radio" name="role" value="Other" required> Other</label>
+      <!-- Only FORM has header -->
+      <div id="formContainer">
+        <header>
+          <h2 id="contactTitle">Get in touch — Artists first, everyone welcome.</h2>
+        </header>
+        <div class="modal-body">
+          <p class="helper-title">What brings you here today? We’ll follow up.</p>
+          <form id="contactForm" action="/api/contact" method="POST" novalidate>
+            <!-- Name -->
+            <div class="group large-gap" id="grp-name">
+              <label for="name" class="form-label">Name<span class="required-asterisk">*</span></label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+              <p class="error">Please enter your name.</p>
             </div>
-            <p class="error">Please choose one.</p>
-          </div>
 
-          <!-- Message -->
-          <div class="group large-gap" id="grp-message">
-            <label for="message" class="form-label">What brings you here?<span class="required-asterisk">*</span></label>
-            <textarea id="message" name="message" maxlength="160" placeholder="Catalog chaos, royalties, collaboration, etc." required></textarea>
-            <div class="helper" style="margin-top:6px;"><span id="charLeft">160</span> characters left</div>
-            <p class="error">Tell us a bit so we can route your note.</p>
-          </div>
-
-          <!-- Ref -->
-          <div class="group" id="grp-ref">
-            <label for="ref" class="form-label">How did you hear about Label Kid?<span class="required-asterisk">*</span></label>
-            <select id="ref" name="ref" required>
-              <option value="" disabled selected>Select one</option>
-              <option>Friend/Artist</option>
-              <option>Discord/Reddit</option>
-              <option>Social</option>
-              <option>Search</option>
-              <option>Press/Blog</option>
-              <option>Event</option>
-              <option>Other</option>
-            </select>
-            <p class="error">Please select an option.</p>
-          </div>
-
-          <!-- Consent -->
-          <div class="group" id="grp-consent">
-            <div class="consent-row">
-              <input id="consent" type="checkbox" required />
-              <label for="consent" class="form-label">I agree to be contacted.<span class="required-asterisk">*</span></label>
+            <!-- Email -->
+            <div class="group large-gap" id="grp-email">
+              <label for="email" class="form-label">Email<span class="required-asterisk">*</span></label>
+              <input id="email" name="_replyto" type="email" autocomplete="email" required />
+              <p class="error">Enter a valid email address.</p>
             </div>
-            <p class="error">Please agree so we can reach you.</p>
-          </div>
 
-          <!-- Actions -->
-          <div class="actions">
-            <div class="left">
-              <a href="mailto:ben@labelkid.io" aria-label="Prefer email?">Prefer email?</a>
+            <!-- Role -->
+            <div class="group large-gap" id="grp-role">
+              <label class="form-label">I am…<span class="required-asterisk">*</span></label>
+              <div class="radio-stack" role="radiogroup" aria-label="I am">
+                <label class="radio-item"><input type="radio" name="role" value="Artist/Creator" required> Artist/Creator</label>
+                <label class="radio-item"><input type="radio" name="role" value="Label/Manager" required> Label/Manager</label>
+                <label class="radio-item"><input type="radio" name="role" value="Investor/Partner" required> Investor/Partner</label>
+                <label class="radio-item"><input type="radio" name="role" value="Other" required> Other</label>
+              </div>
+              <p class="error">Please choose one.</p>
             </div>
-            <div class="right" style="display:flex;gap:12px;">
-              <button type="button" class="btn btn-secondary" id="cancelModal">Cancel</button>
-              <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
-            </div>
-          </div>
-        </form>
 
-        <!-- Success state -->
-        <div id="successState" class="success-pane" aria-live="polite" aria-atomic="true">
-          <h3 class="success-title">Thanks for your interest.</h3>
-          <p class="success-copy">
-            We think you’re gonna love what we’re making. We’ll be in touch soon.
-          </p>
-          <div style="display:flex;justify-content:flex-end;">
-            <button class="btn btn-primary" id="closeSuccess" type="button">Close</button>
+            <!-- Message -->
+            <div class="group large-gap" id="grp-message">
+              <label for="message" class="form-label">What brings you here?<span class="required-asterisk">*</span></label>
+              <textarea id="message" name="message" maxlength="160" placeholder="Catalog chaos, royalties, collaboration, etc." required></textarea>
+              <div class="helper" style="margin-top:6px;"><span id="charLeft">160</span> characters left</div>
+              <p class="error">Tell us a bit so we can route your note.</p>
+            </div>
+
+            <!-- Ref -->
+            <div class="group" id="grp-ref">
+              <label for="ref" class="form-label">How did you hear about Label Kid?<span class="required-asterisk">*</span></label>
+              <select id="ref" name="ref" required>
+                <option value="" disabled selected>Select one</option>
+                <option>Friend/Artist</option>
+                <option>Discord/Reddit</option>
+                <option>Social</option>
+                <option>Search</option>
+                <option>Press/Blog</option>
+                <option>Event</option>
+                <option>Other</option>
+              </select>
+              <p class="error">Please select an option.</p>
+            </div>
+
+            <!-- Consent -->
+            <div class="group" id="grp-consent">
+              <div class="consent-row">
+                <input id="consent" type="checkbox" required />
+                <label for="consent" class="form-label">I agree to be contacted.<span class="required-asterisk">*</span></label>
+              </div>
+              <p class="error">Please agree so we can reach you.</p>
+            </div>
+
+            <!-- Actions -->
+            <div class="actions">
+              <div class="left">
+                <a href="mailto:ben@labelkid.io" aria-label="Prefer email?">Prefer email?</a>
+              </div>
+              <div class="right" style="display:flex;gap:12px;">
+                <button type="button" class="btn btn-secondary" id="cancelModal">Cancel</button>
+                <button type="submit" class="btn btn-positive" id="submitBtn">Send Message</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Confirmation/Success window: clean, centered, no header or helper -->
+      <div id="successState" class="success-pane" aria-live="polite" aria-atomic="true">
+        <div>
+          <div class="success-title">Thanks for your interest.</div>
+          <div class="success-copy">
+            We think you’re gonna love what we’re making.<br>We’ll be in touch soon.
           </div>
+        </div>
+        <div class="success-actions">
+          <button class="btn btn-positive" id="closeSuccess" type="button">Close</button>
         </div>
       </div>
     </div>
@@ -338,8 +361,9 @@
     const modal = document.getElementById('contactModal');
     const cancelBtn = document.getElementById('cancelModal');
     const form = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('submitBtn');
+    const formContainer = document.getElementById('formContainer');
     const successState = document.getElementById('successState');
+    const submitBtn = document.getElementById('submitBtn');
     const closeSuccess = document.getElementById('closeSuccess');
     const msg = document.getElementById('message');
     const charLeft = document.getElementById('charLeft');
@@ -347,6 +371,8 @@
     function openModal(){
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden','false');
+      formContainer.style.display='block';
+      successState.style.display='none';
       setTimeout(()=>document.getElementById('name')?.focus(),50);
     }
     function closeModal(){
@@ -382,34 +408,25 @@
 
     function validate(){
       let ok = true;
-
       const name = form.name.value.trim();
       setInvalid(groups.name, name === ''); ok = ok && name !== '';
-
       const email = (form._replyto?.value || '').trim();
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
       setInvalid(groups.email, !emailOk); ok = ok && emailOk;
-
       const hasRole = !!form.querySelector('input[name="role"]:checked');
       setInvalid(groups.role, !hasRole); ok = ok && hasRole;
-
       const messageOk = (msg.value.trim().length > 0);
       setInvalid(groups.message, !messageOk); ok = ok && messageOk;
-
       const refOk = (document.getElementById('ref')?.value || '') !== '';
       setInvalid(groups.ref, !refOk); ok = ok && refOk;
-
       const consentOk = document.getElementById('consent').checked;
       setInvalid(groups.consent, !consentOk); ok = ok && consentOk;
-
       return ok;
     }
 
-    // Live validation
     form?.addEventListener('input', validate);
     form?.addEventListener('change', validate);
 
-    // Submit
     form?.addEventListener('submit', async (e)=>{
       e.preventDefault();
 
@@ -430,7 +447,8 @@
 
         if(res.ok && json.ok){
           form.style.display='none';
-          successState.style.display='block';
+          formContainer.style.display='none';
+          successState.style.display='flex';
           window.gtag && gtag('event','contact_submit_success');
         }else{
           submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
@@ -445,7 +463,6 @@
       }
     });
 
-    // Success close
     closeSuccess?.addEventListener('click', ()=>{
       form.reset();
       Object.values(groups).forEach(g => g.classList.remove('invalid'));
