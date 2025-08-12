@@ -62,15 +62,12 @@
 
   <style>
     :root{
+      /* Brand-approved colors ONLY */
       --ink:#122433;           /* primary dark */
-      --paper:#F8F6F2;         /* off-white background */
-      --accent-green:#a8c048;  /* positive */
+      --paper:#F8F6F2;         /* landing background */
+      --green:#A8C04B;         /* positive/confirm buttons */
       --mustard:#e1b341;       /* attention */
-      --orange:#e1572a;        /* urgent */
-      --magenta:#d64391;       /* rare accent */
-
-      --brand:#122433;         /* CTA bg */
-      --text-on-dark:#F8F6F2;  /* text on dark */
+      --offwhite:#F8F6F2;      /* text on dark */
 
       --gap-xl:56px; --gap-lg:40px; --gap-md:24px; --gap-sm:14px; --gap-xs:8px;
       --radius:12px; --radius-lg:16px;
@@ -90,6 +87,8 @@
       -moz-osx-font-smoothing:grayscale;
     }
     img{max-width:100%;height:auto;display:block}
+
+    /* Landing hero */
     .wrap{min-height:100dvh;display:grid;place-items:center;padding:24px}
     .panel{width:100%;max-width:1280px;display:flex;justify-content:center;align-items:center}
     .container{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}
@@ -99,6 +98,7 @@
     .hero-image{width:602px;max-width:100%;aspect-ratio:1/1}
     .buttons{display:inline-flex;gap:var(--gap-sm);flex-wrap:wrap;align-content:center;position:relative;z-index:1}
 
+    /* Buttons */
     .btn{
       appearance:none;border:0;border-radius:var(--radius);
       padding:12px 18px;cursor:pointer;font-weight:700;line-height:1.45;
@@ -106,31 +106,28 @@
       transition:transform .04s ease, filter .15s ease, background .15s ease, color .15s ease;
     }
     .btn:active{transform:translateY(1px)}
-    .btn-primary{background:var(--brand);color:var(--text-on-dark)}
-    .btn-secondary{background:transparent;color:var(--text-on-dark);border:1px solid rgba(248,246,242,.35)}
-    .btn-positive{background:var(--accent-green);color:var(--ink);}
+    .btn-primary{background:var(--ink);color:var(--offwhite)}
+    .btn-secondary{background:transparent;color:var(--offwhite);border:1px solid rgba(248,246,242,.35)}
+    .btn-positive{background:var(--green);color:var(--ink)}
     .btn[disabled]{opacity:.6;pointer-events:none}
 
-    /* Tablet */
-    .panel.tablet{max-width:800px}
-    .panel.tablet .hero{padding:96px 32px;gap:var(--gap-md)}
-    .panel.tablet .heading h1{font-size:56px}
-    .panel.tablet .hero-image{width:393px}
-    .panel.tablet .btn-primary{font-size:14px}
-
-    /* Mobile */
-    .panel.mobile{max-width:375px}
-    .panel.mobile .hero{padding:80px 24px;gap:var(--gap-md)}
-    .panel.mobile .heading h1{font-size:40px}
-    .panel.mobile .hero-image{width:253px}
-    .panel.mobile .btn-primary{font-size:13px}
-
+    /* Responsive */
     .panel.desktop{display:none}
     .panel.tablet{display:none}
     .panel.mobile{display:none}
     @media (min-width:1025px){.panel.desktop{display:flex}}
-    @media (min-width:768px) and (max-width:1024.98px){.panel.tablet{display:flex}}
-    @media (max-width:767.98px){.panel.mobile{display:flex}}
+    @media (min-width:768px) and (max-width:1024.98px){
+      .panel.tablet{display:flex}
+      .panel.tablet .hero{padding:96px 32px;gap:var(--gap-md)}
+      .panel.tablet .heading h1{font-size:56px}
+      .panel.tablet .hero-image{width:393px}
+    }
+    @media (max-width:767.98px){
+      .panel.mobile{display:flex}
+      .panel.mobile .hero{padding:80px 24px;gap:var(--gap-md)}
+      .panel.mobile .heading h1{font-size:40px}
+      .panel.mobile .hero-image{width:253px}
+    }
 
     /* Modal */
     .modal-backdrop{
@@ -142,15 +139,15 @@
     .is-open{display:flex; pointer-events:auto}
     .modal{
       width:100%; max-width:540px;
-      background:var(--brand); color:var(--text-on-dark);
+      background:#122433; /* STRICT: form/confirmation background */
+      color:var(--offwhite);
       border-radius:var(--radius-lg); box-shadow:0 20px 60px rgba(0,0,0,.25); overflow:hidden;
-      z-index:1001;
-      display:flex; flex-direction:column;
+      z-index:1001; display:flex; flex-direction:column;
     }
 
+    /* Form view (has header) */
     .modal header{padding:24px 28px 12px 28px;border-bottom:1px solid rgba(248,246,242,.08)}
     .modal header h2{margin:0;font-size:28px;line-height:1.2}
-
     .modal .modal-body{padding:24px 28px}
     .helper-title{font-size:18px;line-height:1.4;margin:0 0 var(--gap-md);color:#cfd6db}
 
@@ -158,6 +155,7 @@
     form .group.large-gap{margin-bottom:var(--gap-lg)}
     label.form-label{display:inline-block;margin-bottom:6px;font-size:14px}
     .required-asterisk{color:var(--mustard);margin-left:4px;font-weight:700}
+
     input[type="text"], input[type="email"], select, textarea{
       width:100%;padding:14px 14px;border-radius:10px;font-size:15px;outline:none;
       background:var(--fieldBg);color:var(--fieldInk);border:1px solid var(--fieldBorder)
@@ -175,42 +173,31 @@
     .actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:var(--gap-lg)}
     .actions .left a{color:#cfe07a;text-decoration:underline}
 
+    /* Inline validation */
     .error{color:#ffb3b3;font-size:12px;margin-top:6px;display:none}
     .invalid input, .invalid textarea, .invalid select{border-color:#ff8a8a}
     .invalid .error{display:block}
 
-    /* Confirmation success modal */
+    /* Confirmation (success) view — no header */
     .success-pane{
       display:none;
       flex-direction:column;
       align-items:center;
       padding:40px 32px;
       text-align:center;
-      min-height:340px;
+      min-height:320px;
       justify-content:center;
     }
     .success-title{
-      font-size:2rem;
-      font-weight:900;
-      margin:0 0 18px 0;
-      letter-spacing:-.01em;
+      font-size:2rem; font-weight:900; margin:0 0 18px 0; letter-spacing:-.01em;
     }
     .success-copy{
-      font-size:1.18rem;
-      margin:0 0 38px 0;
+      font-size:1.18rem; margin:0 0 32px 0;
     }
-    .success-actions{
-      width:100%;
-      display:flex;
-      justify-content:center;
-      gap:12px;
-    }
-    .success-actions .btn-positive{
-      min-width:120px;
-      font-size:1rem;
-    }
+    .success-actions{display:flex;justify-content:center;gap:12px}
+    .success-actions .btn-positive{min-width:120px;font-size:1rem}
 
-    .modal, .modal *{color-scheme:dark}
+    .modal, .modal *{color-scheme:dark} /* never use #fff */
   </style>
 </head>
 <body>
@@ -259,13 +246,14 @@
   <div id="contactModal" class="modal-backdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
 
-      <!-- Only FORM has header -->
+      <!-- FORM VIEW -->
       <div id="formContainer">
         <header>
           <h2 id="contactTitle">Get in touch — Artists first, everyone welcome.</h2>
         </header>
         <div class="modal-body">
           <p class="helper-title">What brings you here today? We’ll follow up.</p>
+
           <form id="contactForm" action="/api/contact" method="POST" novalidate>
             <!-- Name -->
             <div class="group large-gap" id="grp-name">
@@ -301,7 +289,7 @@
               <p class="error">Tell us a bit so we can route your note.</p>
             </div>
 
-            <!-- Ref -->
+            <!-- Referral -->
             <div class="group" id="grp-ref">
               <label for="ref" class="form-label">How did you hear about Label Kid?<span class="required-asterisk">*</span></label>
               <select id="ref" name="ref" required>
@@ -320,7 +308,7 @@
             <!-- Consent -->
             <div class="group" id="grp-consent">
               <div class="consent-row">
-                <input id="consent" type="checkbox" required />
+                <input id="consent" name="consent" type="checkbox" value="yes" required />
                 <label for="consent" class="form-label">I agree to be contacted.<span class="required-asterisk">*</span></label>
               </div>
               <p class="error">Please agree so we can reach you.</p>
@@ -340,14 +328,10 @@
         </div>
       </div>
 
-      <!-- Confirmation/Success window: clean, centered, no header or helper -->
+      <!-- CONFIRMATION VIEW (no header/helper, centered) -->
       <div id="successState" class="success-pane" aria-live="polite" aria-atomic="true">
-        <div>
-          <div class="success-title">Thanks for your interest.</div>
-          <div class="success-copy">
-            We think you’re gonna love what we’re making.<br>We’ll be in touch soon.
-          </div>
-        </div>
+        <div class="success-title">Thanks for your interest.</div>
+        <div class="success-copy">We think you’re gonna love what we’re making. We’ll be in touch soon.</div>
         <div class="success-actions">
           <button class="btn btn-positive" id="closeSuccess" type="button">Close</button>
         </div>
@@ -356,23 +340,42 @@
   </div>
 
   <script>
-    // Bind only the landing CTA buttons
+    // Elements
     const openBtns = document.querySelectorAll('.js-open-modal');
     const modal = document.getElementById('contactModal');
-    const cancelBtn = document.getElementById('cancelModal');
-    const form = document.getElementById('contactForm');
     const formContainer = document.getElementById('formContainer');
     const successState = document.getElementById('successState');
+    const cancelBtn = document.getElementById('cancelModal');
+    const form = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
     const closeSuccess = document.getElementById('closeSuccess');
     const msg = document.getElementById('message');
     const charLeft = document.getElementById('charLeft');
+
+    // Validation groups
+    const groups = {
+      name: document.getElementById('grp-name'),
+      email: document.getElementById('grp-email'),
+      role: document.getElementById('grp-role'),
+      message: document.getElementById('grp-message'),
+      ref: document.getElementById('grp-ref'),
+      consent: document.getElementById('grp-consent')
+    };
+
+    function resetSubmitBtn(){
+      if(!submitBtn) return;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Message';
+      submitBtn.classList.remove('btn-primary');
+      submitBtn.classList.add('btn-positive'); // keep it green
+    }
 
     function openModal(){
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden','false');
       formContainer.style.display='block';
       successState.style.display='none';
+      resetSubmitBtn();
       setTimeout(()=>document.getElementById('name')?.focus(),50);
     }
     function closeModal(){
@@ -384,6 +387,7 @@
     cancelBtn?.addEventListener('click', closeModal);
     modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.classList.contains('is-open')) closeModal(); });
+    document.addEventListener('DOMContentLoaded', resetSubmitBtn);
 
     // Character counter
     msg?.addEventListener('input', ()=>{
@@ -392,41 +396,37 @@
     });
 
     // Inline validation
-    const groups = {
-      name: document.getElementById('grp-name'),
-      email: document.getElementById('grp-email'),
-      role: document.getElementById('grp-role'),
-      message: document.getElementById('grp-message'),
-      ref: document.getElementById('grp-ref'),
-      consent: document.getElementById('grp-consent')
-    };
-
     function setInvalid(groupEl, invalid){
       if(!groupEl) return;
       groupEl.classList.toggle('invalid', invalid);
     }
-
     function validate(){
       let ok = true;
       const name = form.name.value.trim();
       setInvalid(groups.name, name === ''); ok = ok && name !== '';
-      const email = (form._replyto?.value || '').trim();
-      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      const emailVal = (form._replyto?.value || '').trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
       setInvalid(groups.email, !emailOk); ok = ok && emailOk;
+
       const hasRole = !!form.querySelector('input[name="role"]:checked');
       setInvalid(groups.role, !hasRole); ok = ok && hasRole;
+
       const messageOk = (msg.value.trim().length > 0);
       setInvalid(groups.message, !messageOk); ok = ok && messageOk;
+
       const refOk = (document.getElementById('ref')?.value || '') !== '';
       setInvalid(groups.ref, !refOk); ok = ok && refOk;
+
       const consentOk = document.getElementById('consent').checked;
       setInvalid(groups.consent, !consentOk); ok = ok && consentOk;
+
       return ok;
     }
-
     form?.addEventListener('input', validate);
     form?.addEventListener('change', validate);
 
+    // Submit
     form?.addEventListener('submit', async (e)=>{
       e.preventDefault();
 
@@ -436,13 +436,25 @@
         return;
       }
 
-      submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
-      try{
-        const fd = new FormData(form);
-        const role = form.querySelector('input[name="role"]:checked')?.value || '';
-        fd.append('role', role);
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
 
-        const res = await fetch(form.action,{ method:'POST', body:fd });
+      try{
+        // Build explicit payload so ALL fields appear in your email
+        const fd = new FormData();
+        const emailVal = (form._replyto?.value || '').trim();
+        fd.append('name', form.name.value.trim());
+        fd.append('_replyto', emailVal); // keep if backend expects _replyto
+        fd.append('email', emailVal);     // also provide 'email' key
+        fd.append('role', form.querySelector('input[name="role"]:checked')?.value || '');
+        fd.append('message', (msg.value || '').trim());
+        fd.append('ref', document.getElementById('ref')?.value || '');
+        fd.append('consent', document.getElementById('consent').checked ? 'yes' : 'no');
+        // Optional context
+        fd.append('_page', window.location.href);
+        fd.append('_ts', new Date().toISOString());
+
+        const res = await fetch(form.action, { method:'POST', body: fd });
         const json = await res.json().catch(()=>({}));
 
         if(res.ok && json.ok){
@@ -451,23 +463,25 @@
           successState.style.display='flex';
           window.gtag && gtag('event','contact_submit_success');
         }else{
-          submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
+          resetSubmitBtn();
           alert('Sorry, something went wrong submitting the form. Please try again.');
           window.gtag && gtag('event','contact_submit_error');
         }
       }catch(err){
-        submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
-        alert('Network error. Please try again.');
         console.error(err);
+        resetSubmitBtn();
+        alert('Network error. Please try again.');
         window.gtag && gtag('event','contact_submit_network_error');
       }
     });
 
+    // Success close
     closeSuccess?.addEventListener('click', ()=>{
       form.reset();
       Object.values(groups).forEach(g => g.classList.remove('invalid'));
       form.style.display='block';
       successState.style.display='none';
+      resetSubmitBtn();
       closeModal();
     });
   </script>
