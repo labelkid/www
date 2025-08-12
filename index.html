@@ -39,7 +39,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="/lk-mark-01.png" />
 
   <!-- Favicons -->
@@ -61,15 +61,21 @@
   </script>
 
   <style>
+    /* Color system (from your palette) */
     :root{
-      --ink:#F8F6F2;          /* global text color: always off-white */
-      --paper:#F8F6F2;        /* landing background */
-      --brand:#122433;        /* primary brand / button bg */
-      --accent:#A8C04B;       /* secondary accent if needed */
-      --modalBg:#122433;      /* modal background */
-      --modalInk:#F8F6F2;     /* modal text */
+      --ink:#122433;           /* primary dark */
+      --paper:#F8F6F2;         /* off-white background */
+      --accent-green:#a8c048;  /* positive */
+      --mustard:#e1b341;       /* attention */
+      --orange:#e1572a;        /* urgent */
+      --magenta:#d64391;       /* rare accent */
+
+      --brand:#122433;         /* CTA bg */
+      --text-on-dark:#F8F6F2;  /* text on dark */
+
       --gap-xl:56px; --gap-lg:40px; --gap-md:24px; --gap-sm:14px; --gap-xs:8px;
       --radius:12px; --radius-lg:16px;
+
       --fieldBg:#0f1c27; --fieldInk:#e9edf1; --fieldBorder:rgba(248,246,242,.20);
     }
 
@@ -79,7 +85,7 @@
     body{
       min-height:100%;
       background:var(--paper);
-      color:var(--brand); /* headings on LP; form uses modalInk */
+      color:var(--ink);
       font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
       text-rendering:optimizeLegibility;
       -webkit-font-smoothing:antialiased;
@@ -95,7 +101,7 @@
     .heading{width:100%;max-width:1100px;display:flex;justify-content:center;text-align:center}
     .heading h1{margin:0;color:#122433;font-weight:900;line-height:1.1;font-size:64px}
     .hero-image{width:602px;max-width:100%;aspect-ratio:1/1}
-    .buttons{display:inline-flex;gap:var(--gap-sm);flex-wrap:wrap;align-content:center;background:transparent;position:relative;z-index:1}
+    .buttons{display:inline-flex;gap:var(--gap-sm);flex-wrap:wrap;align-content:center;position:relative;z-index:1}
 
     /* Buttons */
     .btn{
@@ -103,11 +109,10 @@
       padding:12px 18px;cursor:pointer;font-weight:700;line-height:1.45;
       -webkit-tap-highlight-color:transparent; touch-action:manipulation;
       transition:transform .04s ease, filter .15s ease, background .15s ease, color .15s ease;
-      color:var(--ink); /* default text color is off-white */
     }
     .btn:active{transform:translateY(1px)}
-    .btn-primary{background:var(--brand);color:#F8F6F2} /* Request 1: brand bg, off-white text */
-    .btn-secondary{background:transparent;color:#F8F6F2;border:1px solid rgba(248,246,242,.35)}
+    .btn-primary{background:var(--brand);color:var(--text-on-dark)}
+    .btn-secondary{background:transparent;color:var(--text-on-dark);border:1px solid rgba(248,246,242,.35)}
     .btn[disabled]{opacity:.6;pointer-events:none}
 
     /* Tablet */
@@ -142,25 +147,22 @@
     .is-open{display:flex; pointer-events:auto}
     .modal{
       width:100%; max-width:720px;
-      background:var(--modalBg); color:var(--modalInk);
+      background:var(--brand); color:var(--text-on-dark);
       border-radius:var(--radius-lg); box-shadow:0 20px 60px rgba(0,0,0,.25); overflow:hidden;
       z-index:1001;
     }
 
-    /* Modal header (no top "Close" button per 2a) */
     .modal header{padding:24px 28px;border-bottom:1px solid rgba(248,246,242,.08)}
-    .modal header h2{margin:0;font-size:28px;line-height:1.2;color:var(--modalInk)}
+    .modal header h2{margin:0;font-size:28px;line-height:1.2}
 
     .modal .modal-body{padding:24px 28px}
-    /* 2b: helper as H4 scale */
     .helper-title{font-size:18px;line-height:1.4;margin:0 0 var(--gap-md);color:#cfd6db}
 
-    /* Form layout: spacious, aligned */
+    /* Form layout */
     form .group{margin-bottom:var(--gap-md)}
     form .group.large-gap{margin-bottom:var(--gap-lg)}
-    .label-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--gap-xs)}
-    label.form-label{font-size:14px;color:var(--modalInk)}
-    .required-badge{font-size:12px;color:#cfe07a}
+    label.form-label{display:inline-block;margin-bottom:6px;font-size:14px}
+    .required-asterisk{color:var(--mustard);margin-left:4px;font-weight:700}
 
     input[type="text"], input[type="email"], select, textarea{
       width:100%;padding:14px 14px;border-radius:10px;font-size:15px;outline:none;
@@ -169,30 +171,27 @@
     textarea{min-height:140px;resize:vertical}
     input::placeholder, textarea::placeholder{color:#9fb1bf}
 
-    /* Radios: tidy grid, aligned bullets */
     .radio-stack{display:grid;gap:10px;margin-top:6px}
     .radio-item{display:flex;align-items:center;gap:10px}
     .radio-item input{accent-color:#cfe07a;width:18px;height:18px}
 
-    /* Consent row: keep checkbox close to label (2e) */
     .consent-row{display:flex;align-items:center;gap:10px;margin-top:6px}
     .consent-row input{accent-color:#cfe07a;width:18px;height:18px}
 
-    /* Action row */
     .actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:var(--gap-lg)}
     .actions .left a{color:#cfe07a;text-decoration:underline}
 
-    /* Inline validation (2g) */
+    /* Inline validation */
     .error{color:#ffb3b3;font-size:12px;margin-top:6px;display:none}
     .invalid input, .invalid textarea, .invalid select{border-color:#ff8a8a}
     .invalid .error{display:block}
 
-    /* Success state (2h) */
+    /* Success state */
     .success-pane{display:none;padding:28px}
     .success-title{font-size:28px;margin:0 0 var(--gap-md)}
-    .success-copy{font-size:18px;margin:0 0 var(--gap-lg);color:var(--modalInk)}
+    .success-copy{font-size:18px;margin:0 0 var(--gap-lg)}
 
-    /* Ensure all text in modal off-white; no #fff anywhere */
+    /* Ensure modal uses dark scheme (no #fff anywhere) */
     .modal, .modal *{color-scheme:dark}
   </style>
 </head>
@@ -243,7 +242,6 @@
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
       <header>
         <h2 id="contactTitle">Get in touch — Artists first, everyone welcome.</h2>
-        <!-- 2a: removed top Close button -->
       </header>
 
       <div class="modal-body">
@@ -252,30 +250,21 @@
         <form id="contactForm" action="/api/contact" method="POST" novalidate>
           <!-- Name -->
           <div class="group large-gap" id="grp-name">
-            <div class="label-row">
-              <label for="name" class="form-label">Name</label>
-              <span class="required-badge">Required</span>
-            </div>
+            <label for="name" class="form-label">Name<span class="required-asterisk">*</span></label>
             <input id="name" name="name" type="text" autocomplete="name" required />
             <p class="error">Please enter your name.</p>
           </div>
 
           <!-- Email -->
           <div class="group large-gap" id="grp-email">
-            <div class="label-row">
-              <label for="email" class="form-label">Email</label>
-              <span class="required-badge">Required</span>
-            </div>
+            <label for="email" class="form-label">Email<span class="required-asterisk">*</span></label>
             <input id="email" name="_replyto" type="email" autocomplete="email" required />
             <p class="error">Enter a valid email address.</p>
           </div>
 
           <!-- Role -->
           <div class="group large-gap" id="grp-role">
-            <div class="label-row">
-              <label class="form-label">I am…</label>
-              <span class="required-badge">Required</span>
-            </div>
+            <label class="form-label">I am…<span class="required-asterisk">*</span></label>
             <div class="radio-stack" role="radiogroup" aria-label="I am">
               <label class="radio-item"><input type="radio" name="role" value="Artist/Creator" required> Artist/Creator</label>
               <label class="radio-item"><input type="radio" name="role" value="Label/Manager" required> Label/Manager</label>
@@ -287,23 +276,15 @@
 
           <!-- Message -->
           <div class="group large-gap" id="grp-message">
-            <div class="label-row">
-              <label for="message" class="form-label">What brings you here?</label>
-              <span class="required-badge">Required</span>
-            </div>
+            <label for="message" class="form-label">What brings you here?<span class="required-asterisk">*</span></label>
             <textarea id="message" name="message" maxlength="160" placeholder="Catalog chaos, royalties, collaboration, etc." required></textarea>
-            <div class="label-row" style="margin-top:6px;">
-              <span class="helper"><span id="charLeft">160</span> characters left</span>
-            </div>
+            <div class="helper" style="margin-top:6px;"><span id="charLeft">160</span> characters left</div>
             <p class="error">Tell us a bit so we can route your note.</p>
           </div>
 
           <!-- Ref -->
           <div class="group" id="grp-ref">
-            <div class="label-row">
-              <label for="ref" class="form-label">How did you hear about Label Kid?</label>
-              <span class="required-badge">Required</span>
-            </div>
+            <label for="ref" class="form-label">How did you hear about Label Kid?<span class="required-asterisk">*</span></label>
             <select id="ref" name="ref" required>
               <option value="" disabled selected>Select one</option>
               <option>Friend/Artist</option>
@@ -321,7 +302,7 @@
           <div class="group" id="grp-consent">
             <div class="consent-row">
               <input id="consent" type="checkbox" required />
-              <label for="consent" class="form-label">I agree to be contacted.</label>
+              <label for="consent" class="form-label">I agree to be contacted.<span class="required-asterisk">*</span></label>
             </div>
             <p class="error">Please agree so we can reach you.</p>
           </div>
@@ -338,8 +319,8 @@
           </div>
         </form>
 
-        <!-- Success state (clean, one close, no helper) -->
-        <div id="successState" class="success-pane">
+        <!-- Success state -->
+        <div id="successState" class="success-pane" aria-live="polite" aria-atomic="true">
           <h3 class="success-title">Thanks for your interest.</h3>
           <p class="success-copy">
             We think you’re gonna love what we’re making. We’ll be in touch soon.
@@ -353,7 +334,7 @@
   </div>
 
   <script>
-    // Landing CTA only
+    // Bind only the landing CTA buttons
     const openBtns = document.querySelectorAll('.js-open-modal');
     const modal = document.getElementById('contactModal');
     const cancelBtn = document.getElementById('cancelModal');
@@ -385,7 +366,7 @@
       if(charLeft) charLeft.textContent = Math.max(0,left);
     });
 
-    // Inline validation helpers (2g)
+    // Inline validation
     const groups = {
       name: document.getElementById('grp-name'),
       email: document.getElementById('grp-email'),
@@ -404,43 +385,36 @@
       let ok = true;
 
       const name = form.name.value.trim();
-      setInvalid(groups.name, name === '');
-      ok = ok && name !== '';
+      setInvalid(groups.name, name === ''); ok = ok && name !== '';
 
       const email = (form._replyto?.value || '').trim();
       const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      setInvalid(groups.email, !emailOk);
-      ok = ok && emailOk;
+      setInvalid(groups.email, !emailOk); ok = ok && emailOk;
 
       const hasRole = !!form.querySelector('input[name="role"]:checked');
-      setInvalid(groups.role, !hasRole);
-      ok = ok && hasRole;
+      setInvalid(groups.role, !hasRole); ok = ok && hasRole;
 
       const messageOk = (msg.value.trim().length > 0);
-      setInvalid(groups.message, !messageOk);
-      ok = ok && messageOk;
+      setInvalid(groups.message, !messageOk); ok = ok && messageOk;
 
       const refOk = (document.getElementById('ref')?.value || '') !== '';
-      setInvalid(groups.ref, !refOk);
-      ok = ok && refOk;
+      setInvalid(groups.ref, !refOk); ok = ok && refOk;
 
       const consentOk = document.getElementById('consent').checked;
-      setInvalid(groups.consent, !consentOk);
-      ok = ok && consentOk;
+      setInvalid(groups.consent, !consentOk); ok = ok && consentOk;
 
       return ok;
     }
 
-    // Re-validate on input/change
-    form?.addEventListener('input', (e)=>{ validate(); });
-    form?.addEventListener('change', (e)=>{ validate(); });
+    // Live validation
+    form?.addEventListener('input', validate);
+    form?.addEventListener('change', validate);
 
-    // Submit with inline validation + success UI
+    // Submit
     form?.addEventListener('submit', async (e)=>{
       e.preventDefault();
 
       if(!validate()){
-        // Focus first invalid field
         const firstInvalid = document.querySelector('.invalid input, .invalid textarea, .invalid select');
         firstInvalid?.focus();
         return;
@@ -460,7 +434,6 @@
           successState.style.display='block';
           window.gtag && gtag('event','contact_submit_success');
         }else{
-          // Graceful inline error at top of form
           submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
           alert('Sorry, something went wrong submitting the form. Please try again.');
           window.gtag && gtag('event','contact_submit_error');
@@ -473,9 +446,9 @@
       }
     });
 
+    // Success close
     closeSuccess?.addEventListener('click', ()=>{
       form.reset();
-      // reset validation UI
       Object.values(groups).forEach(g => g.classList.remove('invalid'));
       form.style.display='block';
       successState.style.display='none';
