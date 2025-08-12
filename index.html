@@ -4,252 +4,282 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Labelkid</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap" rel="stylesheet">
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png"> <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png"> <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png"> <link rel="manifest" href="/favicon_io/site.webmanifest"> <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico"> <link rel="icon" sizes="192x192" href="/favicon_io/android-chrome-192x192.png"> <link rel="icon" sizes="512x512" href="/favicon_io/android-chrome-512x512.png">
-<style>
-  :root {
-    --ink: #122433;
-    --paper: #F8F6F2; /* off‑white */
-    --cta: #122433;
-    --ctaText: #F8F6F2;
-    --gap-lg: 48px;
-    --gap-md: 32px;
-    --gap-sm: 16px;
-  }
-  * { box-sizing: border-box; }
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
-  body {
-    min-height: 100%;
-    background: var(--paper);      /* fill whole page with off‑white */
-    color: var(--ink);
-    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  }
-  img { max-width: 100%; height: auto; display: block; }
 
-  /* Remove “white frame”: no white wrapper, just centered content area bounds */
-  .wrap {
-    min-height: 100dvh;
-    display: grid;
-    place-items: center;
-    padding: 24px;
-    /* background removed to avoid white edges */
-  }
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+  <link rel="manifest" href="/favicon_io/site.webmanifest">
+  <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico">
+  <link rel="icon" sizes="192x192" href="/favicon_io/android-chrome-192x192.png">
+  <link rel="icon" sizes="512x512" href="/favicon_io/android-chrome-512x512.png">
 
-  .panel {
-    width: 100%;
-    max-width: 1280px;
-    background: transparent;       /* panel is transparent; off‑white is the page */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  <style>
+    :root{
+      --ink:#122433;          /* dark text */
+      --paper:#F8F6F2;        /* off-white page bg */
+      --cta:#A8C04B;          /* all buttons */
+      --ctaText:#122433;      /* button text */
+      --modalBg:#122433;      /* modal background */
+      --modalInk:#F8F6F2;     /* modal text */
+      --gap-lg:48px; --gap-md:32px; --gap-sm:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0}
+    body{
+      min-height:100%;
+      background:var(--paper);
+      color:var(--ink);
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    }
+    img{max-width:100%;height:auto;display:block}
 
-  .container { width: 100%; display: flex; flex-direction: column; align-items: center; }
-  .hero { width: 100%; padding: 120px 64px; display: flex; flex-direction: column; align-items: center; gap: var(--gap-lg); }
-  .heading { width: 100%; max-width: 1100px; display: flex; justify-content: center; text-align: center; }
-  .heading h1 { margin: 0; color: var(--ink); font-weight: 900; line-height: 1.1; word-wrap: break-word; }
+    .wrap{
+      min-height:100dvh;
+      display:grid;
+      place-items:center;
+      padding:24px;
+    }
+    .panel{
+      width:100%;
+      max-width:1280px;
+      background:transparent;
+      display:flex;justify-content:center;align-items:center;
+    }
+    .container{width:100%;display:flex;flex-direction:column;align-items:center}
+    .hero{width:100%;padding:120px 64px;display:flex;flex-direction:column;align-items:center;gap:var(--gap-lg)}
+    .heading{width:100%;max-width:1100px;display:flex;justify-content:center;text-align:center}
+    .heading h1{margin:0;color:var(--ink);font-weight:900;line-height:1.1}
+    .hero-image{width:602px;max-width:100%;aspect-ratio:1/1}
+    .buttons{display:inline-flex;gap:var(--gap-sm);flex-wrap:wrap;align-content:center;background:transparent}
+    .btn{appearance:none;border:0;border-radius:12px;padding:12px 16px;cursor:pointer;font-weight:600;line-height:1.45}
+    .btn-primary{background:var(--cta);color:var(--ctaText)}
+    .btn-secondary{background:transparent;color:var(--modalInk);border:1px solid rgba(248,246,242,0.25)}
 
-  .hero-image { width: 602px; max-width: 100%; aspect-ratio: 1 / 1; }
+    .heading h1{font-size:64px}
+    .btn-primary{font-size:18px}
 
-  .buttons { display: inline-flex; gap: var(--gap-sm); flex-wrap: wrap; align-content: center; background: transparent; }
-  .btn-primary {
-    appearance: none;
-    border: 0;
-    padding: 12px 16px;
-    background: var(--cta);
-    color: var(--ctaText);
-    border-radius: 12px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    cursor: pointer;
-    font-weight: 500;
-    line-height: 1.45;
-  }
+    .panel.tablet{max-width:800px}
+    .panel.tablet .hero{padding:96px 32px;gap:var(--gap-md)}
+    .panel.tablet .heading h1{font-size:56px}
+    .panel.tablet .hero-image{width:393px}
+    .panel.tablet .btn-primary{font-size:12px}
 
-  /* Desktop base */
-  .heading h1 { font-size: 64px; }
-  .btn-primary { font-size: 18px; }
+    .panel.mobile{max-width:375px}
+    .panel.mobile .hero{padding:80px 24px;gap:var(--gap-md)}
+    .panel.mobile .heading h1{font-size:40px}
+    .panel.mobile .hero-image{width:253px}
+    .panel.mobile .btn-primary{font-size:11px}
 
-  /* Tablet */
-  .panel.tablet { max-width: 800px; }
-  .panel.tablet .hero { padding: 96px 32px; gap: var(--gap-md); }
-  .panel.tablet .heading h1 { font-size: 56px; }
-  .panel.tablet .hero-image { width: 393px; }
-  .panel.tablet .btn-primary { font-size: 12px; }
+    .panel.desktop{display:none}
+    .panel.tablet{display:none}
+    .panel.mobile{display:none}
+    @media (min-width:1025px){.panel.desktop{display:flex}}
+    @media (min-width:768px) and (max-width:1024.98px){.panel.tablet{display:flex}}
+    @media (max-width:767.98px){.panel.mobile{display:flex}}
 
-  /* Mobile */
-  .panel.mobile { max-width: 375px; }
-  .panel.mobile .hero { padding: 80px 24px; gap: var(--gap-md); }
-  .panel.mobile .heading h1 { font-size: 40px; }
-  .panel.mobile .hero-image { width: 253px; }
-  .panel.mobile .btn-primary { font-size: 11px; }
-
-  /* Responsive visibility */
-  .panel.desktop { display: none; }
-  .panel.tablet  { display: none; }
-  .panel.mobile  { display: none; }
-  @media (min-width: 1025px) { .panel.desktop { display: flex; } }
-  @media (min-width: 768px) and (max-width: 1024.98px) { .panel.tablet { display: flex; } }
-  @media (max-width: 767.98px) { .panel.mobile { display: flex; } }
-
-  /* Modal styles */
-  .modal-backdrop {
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.45);
-    display: none;                  /* hidden by default */
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    z-index: 1000;
-  }
-  .modal {
-    width: 100%;
-    max-width: 520px;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-    overflow: hidden;
-  }
-  .modal header {
-    padding: 20px 24px;
-    background: #ffffff;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .modal header h2 {
-    margin: 0; font-size: 20px; color: var(--ink);
-  }
-  .modal .modal-body {
-    padding: 20px 24px;
-    background: var(--paper);       /* off‑white form body */
-  }
-  .modal .row { display: grid; gap: 12px; margin-bottom: 14px; }
-  .modal label { font-size: 14px; color: #2b3a46; }
-  .modal input, .modal textarea {
-    width: 100%; padding: 12px 12px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 10px;
-    font-size: 15px;
-    outline: none;
-    background: #fff;
-  }
-  .modal textarea { min-height: 120px; resize: vertical; }
-  .modal .actions {
-    display: flex; gap: 12px; justify-content: flex-end; padding: 16px 24px 24px;
-    background: var(--paper);
-  }
-  .btn-secondary {
-    background: transparent; color: var(--ink);
-    border: 1px solid rgba(0,0,0,0.2); border-radius: 10px;
-    padding: 10px 14px; cursor: pointer;
-  }
-  .btn-submit {
-    background: var(--cta); color: var(--ctaText);
-    border: 0; border-radius: 10px; padding: 10px 16px; cursor: pointer; font-weight: 600;
-  }
-  .is-open { display: flex; }
-  .helper { font-size: 12px; color: #5f6b74; margin-top: -6px; }
-</style>
-
+    /* Modal */
+    .modal-backdrop{
+      position:fixed;inset:0;
+      background:rgba(0,0,0,.45);
+      display:none;align-items:center;justify-content:center;
+      padding:24px;z-index:1000
+    }
+    .modal{
+      width:100%;max-width:560px;
+      background:var(--modalBg);color:var(--modalInk);
+      border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden
+    }
+    .modal header{
+      padding:20px 24px;border-bottom:1px solid rgba(248,246,242,.1);
+      display:flex;align-items:center;justify-content:space-between;background:transparent
+    }
+    .modal header h2{margin:0;font-size:20px;color:var(--modalInk)}
+    .modal .modal-body{padding:20px 24px;background:transparent}
+    .modal .row{display:grid;gap:12px;margin-bottom:14px}
+    .modal label{font-size:14px;color:var(--modalInk)}
+    .modal input,.modal textarea,.modal select{
+      width:100%;padding:12px 12px;border-radius:10px;font-size:15px;outline:none;
+      background:#0f1c27;color:#e9edf1;border:1px solid rgba(248,246,242,.2)
+    }
+    .modal textarea{min-height:120px;resize:vertical}
+    .modal input::placeholder,.modal textarea::placeholder{color:#9fb1bf}
+    .modal .actions{display:flex;gap:12px;justify-content:flex-end;padding:16px 0 0;background:transparent}
+    .is-open{display:flex}
+    .helper{font-size:12px;color:#cfd6db;margin-top:-6px}
+    .success-copy{color:var(--modalInk);margin:0 0 10px}
+    .inline-link{color:#cfe07a;text-decoration:underline}
+  </style>
 </head>
 <body>
   <div class="wrap">
-
-    <!-- Desktop variant -->
+    <!-- Desktop -->
     <section class="panel desktop">
       <div class="container">
         <div class="hero">
-          <div class="heading">
-            <h1>Establish Your Sovereignty</h1>
-          </div>
-          <img class="hero-image" src="/lk-mark-01.png" alt="Labelkid mark" />
-          <div class="buttons">
-            <button class="btn-primary">See what happens next</button>
-          </div>
+          <div class="heading"><h1>Establish Your Sovereignty</h1></div>
+          <img class="hero-image" src="/lk-mark-01.png" alt="Labelkid mark">
+          <div class="buttons"><button class="btn btn-primary">See what happens next</button></div>
         </div>
       </div>
     </section>
 
-    <!-- Tablet variant -->
+    <!-- Tablet -->
     <section class="panel tablet">
       <div class="container">
         <div class="hero">
-          <div class="heading">
-            <h1>Establish Your Sovereignty</h1>
-          </div>
-          <img class="hero-image" src="/lk-mark-01.png" alt="Labelkid mark" />
-          <div class="buttons">
-            <button class="btn-primary">See what happens next</button>
-          </div>
+          <div class="heading"><h1>Establish Your Sovereignty</h1></div>
+          <img class="hero-image" src="/lk-mark-01.png" alt="Labelkid mark">
+          <div class="buttons"><button class="btn btn-primary">See what happens next</button></div>
         </div>
       </div>
     </section>
 
-    <!-- Mobile variant -->
+    <!-- Mobile -->
     <section class="panel mobile">
       <div class="container">
         <div class="hero">
-          <div class="heading">
-            <h1>Establish Your Sovereignty</h1>
-          </div>
-          <img class="hero-image" src="/lk-mark-01.png" alt="Labelkid mark" />
-          <div class="buttons">
-            <button class="btn-primary">See what happens next</button>
-          </div>
+          <div class="heading"><h1>Establish Your Sovereignty</h1></div>
+          <img class="hero-image" src="/lk-mark-01.png" alt="Labelkid mark">
+          <div class="buttons"><button class="btn btn-primary">See what happens next</button></div>
         </div>
       </div>
     </section>
-
   </div>
-#modal window
+
   <!-- Modal -->
-<div id="contactModal" class="modal-backdrop" aria-hidden="true">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
-    <header>
-      <h2 id="contactTitle">Get in touch</h2>
-      <button id="closeModal" class="btn-secondary" aria-label="Close">Close</button>
-    </header>
-    <div class="modal-body">
-      <form id="contactForm" action="/api/contact" method="POST"> <div class="row"> <label for="name">Name</label> <input id="name" name="name" type="text" autocomplete="name" required /> </div> <div class="row"> <label for="email">Email</label> <input id="email" name="_replyto" type="email" autocomplete="email" required /> </div> <div class="row"> <label for="message">Message</label> <textarea id="message" name="message" required></textarea> </div> <div class="actions"> <button type="button" class="btn-secondary" id="cancelModal">Cancel</button> <button type="submit" class="btn-submit">Send</button> </div> </form>
+  <div id="contactModal" class="modal-backdrop" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+      <header>
+        <h2 id="contactTitle">Get in touch — Artists first, everyone welcome.</h2>
+        <button id="closeModal" class="btn btn-secondary" aria-label="Close">Close</button>
+      </header>
+
+      <div class="modal-body">
+        <p class="helper">What brings you here today? We’ll follow up.</p>
+
+        <form id="contactForm" action="/api/contact" method="POST" novalidate>
+          <div class="row">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+          </div>
+
+          <div class="row">
+            <label for="email">Email</label>
+            <input id="email" name="_replyto" type="email" autocomplete="email" required />
+          </div>
+
+          <fieldset class="row" style="border:0; padding:0; margin:0 0 14px;">
+            <legend style="font-size:14px; margin-bottom:8px; color:var(--modalInk);">I am…</legend>
+            <div style="display:grid; gap:8px;">
+              <label><input type="radio" name="role" value="Artist/Creator" required> Artist/Creator</label>
+              <label><input type="radio" name="role" value="Label/Manager" required> Label/Manager</label>
+              <label><input type="radio" name="role" value="Investor/Partner" required> Investor/Partner</label>
+              <label><input type="radio" name="role" value="Other" required> Other</label>
+            </div>
+          </fieldset>
+
+          <div class="row">
+            <label for="message">What brings you here?</label>
+            <textarea id="message" name="message" maxlength="160" placeholder="Catalog chaos, royalties, collaboration, etc." required></textarea>
+            <div class="helper"><span id="charLeft">160</span> characters left</div>
+          </div>
+
+          <div class="row">
+            <label for="ref">How did you hear about Label Kid?</label>
+            <select id="ref" name="ref">
+              <option value="">Select one (optional)</option>
+              <option>Friend/Artist</option>
+              <option>Discord/Reddit</option>
+              <option>Social</option>
+              <option>Search</option>
+              <option>Press/Blog</option>
+              <option>Event</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="row" style="margin-top:4px;">
+            <label style="display:flex; gap:8px; align-items:center;">
+              <input id="consent" type="checkbox" required>
+              I agree to be contacted.
+            </label>
+          </div>
+
+          <div class="actions" style="display:flex; align-items:center; justify-content:space-between;">
+            <a href="mailto:ben@labelkid.io" class="inline-link">Prefer email? ben@labelkid.io</a>
+            <div style="display:flex; gap:12px;">
+              <button type="button" class="btn btn-secondary" id="cancelModal">Cancel</button>
+              <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Success state -->
+        <div id="successState" style="display:none; padding:12px 0;">
+          <p class="success-copy">
+            Thanks for your interest. Sincerely. We think you’re gonna love what we’re making. We will be in touch.
+          </p>
+          <div class="actions" style="justify-content:flex-end; padding:0;">
+            <button class="btn btn-primary" id="closeSuccess">Close</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-  const openBtn = document.querySelector('.btn-primary');
-  const modal = document.getElementById('contactModal');
-  const closeBtn = document.getElementById('closeModal');
-  const cancelBtn = document.getElementById('cancelModal');
+  <script>
+    const openBtn = document.querySelector('.btn-primary'); // first CTA on page
+    const modal = document.getElementById('contactModal');
+    const closeBtn = document.getElementById('closeModal');
+    const cancelBtn = document.getElementById('cancelModal');
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successState = document.getElementById('successState');
+    const closeSuccess = document.getElementById('closeSuccess');
+    const msg = document.getElementById('message');
+    const charLeft = document.getElementById('charLeft');
 
-  function openModal() {
-    modal.classList.add('is-open');
-    modal.setAttribute('aria-hidden', 'false');
-    // focus first field
-    const first = document.getElementById('name');
-    setTimeout(() => first && first.focus(), 50);
-  }
-  function closeModal() {
-    modal.classList.remove('is-open');
-    modal.setAttribute('aria-hidden', 'true');
-    openBtn && openBtn.focus();
-  }
+    function openModal(){
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden','false');
+      setTimeout(()=>document.getElementById('name')?.focus(),50);
+    }
+    function closeModal(){
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden','true');
+      openBtn?.focus();
+    }
 
-  openBtn && openBtn.addEventListener('click', openModal);
-  closeBtn && closeBtn.addEventListener('click', closeModal);
-  cancelBtn && cancelBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
-  });
-</script>
+    openBtn?.addEventListener('click', openModal);
+    closeBtn?.addEventListener('click', closeModal);
+    cancelBtn?.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.classList.contains('is-open')) closeModal(); });
 
-</body>
-</html>
+    // Character counter
+    msg?.addEventListener('input', ()=>{
+      const left = 160 - (msg.value?.length || 0);
+      if(charLeft) charLeft.textContent = Math.max(0,left);
+    });
+
+    // Submit with inline success UI
+    form?.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+
+      const name = form.name.value.trim();
+      const email = (form._replyto?.value || form.email?.value || "").trim();
+      const hasRole = !!form.querySelector('input[name="role"]:checked');
+      const consent = document.getElementById('consent').checked;
+
+      if(!name || !email || !msg.value.trim() || !hasRole || !consent){
+        alert('Please complete all required fields and consent.');
+        return;
+      }
+
+      submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
+      try{
+        const fd = new
