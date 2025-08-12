@@ -1,21 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Basic -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Labelkid</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap" rel="stylesheet">
+  <!-- SEO -->
+  <title>Label Kid — Establish Your Sovereignty</title>
+  <meta name="description" content="Label Kid is the trusted layer for indie music ops — catalog, rights, splits, and data sovereignty. All with privacy and auditability by design. Its about time!" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://labelkid.io/" />
+  <meta name="theme-color" content="#122433" />
+  <meta name="keywords" content="label kid, labelkid, music rights, indie artists, catalog management, royalties, payouts, auditability" />
+
+  <!-- Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://labelkid.io/" />
+  <meta property="og:title" content="Label Kid — Establish Your Sovereignty" />
+  <meta property="og:description" content="Label Kid is the trusted layer for indie music ops — catalog, rights, splits, and data sovereignty. All with privacy and auditability by design. Its about time!" />
+  <meta property="og:image" content="https://labelkid.io/lk-mark-01.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Label Kid — Establish Your Sovereignty" />
+  <meta name="twitter:description" content="Label Kid is the trusted layer for indie music ops — catalog, rights, splits, and data sovereignty. All with privacy and auditability by design. Its about time!" />
+  <meta name="twitter:image" content="https://labelkid.io/lk-mark-01.png" />
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Label Kid",
+    "url": "https://labelkid.io/",
+    "logo": "https://labelkid.io/lk-mark-01.png",
+    "sameAs": []
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap" rel="stylesheet" />
+  <link rel="preload" as="image" href="/lk-mark-01.png" />
 
   <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
-  <link rel="manifest" href="/favicon_io/site.webmanifest">
-  <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico">
-  <link rel="icon" sizes="192x192" href="/favicon_io/android-chrome-192x192.png">
-  <link rel="icon" sizes="512x512" href="/favicon_io/android-chrome-512x512.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
+  <link rel="manifest" href="/favicon_io/site.webmanifest" />
+  <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico" />
+  <link rel="icon" sizes="192x192" href="/favicon_io/android-chrome-192x192.png" />
+  <link rel="icon" sizes="512x512" href="/favicon_io/android-chrome-512x512.png" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZX2ZY9YQXZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-ZX2ZY9YQXZ');
+  </script>
 
   <style>
     :root{
@@ -26,7 +69,10 @@
       --modalBg:#122433;      /* modal background */
       --modalInk:#F8F6F2;     /* modal text */
       --gap-lg:48px; --gap-md:32px; --gap-sm:16px;
+      --radius:12px;
     }
+
+    /* Reset + base */
     *{box-sizing:border-box}
     html,body{height:100%;margin:0}
     body{
@@ -34,9 +80,13 @@
       background:var(--paper);
       color:var(--ink);
       font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+      text-rendering:optimizeLegibility;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
     img{max-width:100%;height:auto;display:block}
 
+    /* Layout */
     .wrap{
       min-height:100dvh;
       display:grid;
@@ -54,26 +104,39 @@
     .heading{width:100%;max-width:1100px;display:flex;justify-content:center;text-align:center}
     .heading h1{margin:0;color:var(--ink);font-weight:900;line-height:1.1}
     .hero-image{width:602px;max-width:100%;aspect-ratio:1/1}
-    .buttons{display:inline-flex;gap:var(--gap-sm);flex-wrap:wrap;align-content:center;background:transparent}
-    .btn{appearance:none;border:0;border-radius:12px;padding:12px 16px;cursor:pointer;font-weight:600;line-height:1.45}
-    .btn-primary{background:var(--cta);color:var(--ctaText)}
-    .btn-secondary{background:transparent;color:var(--modalInk);border:1px solid rgba(248,246,242,0.25)}
+    .buttons{display:inline-flex;gap:var(--gap-sm);flex-wrap:wrap;align-content:center;background:transparent;position:relative;z-index:1}
 
+    /* Buttons */
+    .btn{
+      appearance:none;border:0;border-radius:var(--radius);
+      padding:12px 16px;cursor:pointer;font-weight:600;line-height:1.45;
+      -webkit-tap-highlight-color:transparent; touch-action:manipulation;
+      transition:transform .04s ease, filter .2s ease;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{background:var(--cta);color:var(--ctaText)}
+    .btn-secondary{background:transparent;color:var(--modalInk);border:1px solid rgba(248,246,242,.25)}
+    .btn[disabled]{opacity:.6;pointer-events:none}
+
+    /* Type scales */
     .heading h1{font-size:64px}
     .btn-primary{font-size:18px}
 
+    /* Tablet */
     .panel.tablet{max-width:800px}
     .panel.tablet .hero{padding:96px 32px;gap:var(--gap-md)}
     .panel.tablet .heading h1{font-size:56px}
     .panel.tablet .hero-image{width:393px}
     .panel.tablet .btn-primary{font-size:12px}
 
+    /* Mobile */
     .panel.mobile{max-width:375px}
     .panel.mobile .hero{padding:80px 24px;gap:var(--gap-md)}
     .panel.mobile .heading h1{font-size:40px}
     .panel.mobile .hero-image{width:253px}
     .panel.mobile .btn-primary{font-size:11px}
 
+    /* Responsive visibility */
     .panel.desktop{display:none}
     .panel.tablet{display:none}
     .panel.mobile{display:none}
@@ -83,35 +146,36 @@
 
     /* Modal */
     .modal-backdrop{
-      position:fixed;inset:0;
+      position:fixed; inset:0;
       background:rgba(0,0,0,.45);
-      display:none;align-items:center;justify-content:center;
-      padding:24px;z-index:1000
+      display:none; align-items:center; justify-content:center;
+      padding:24px; z-index:1000; pointer-events:none;
     }
     .modal{
-      width:100%;max-width:560px;
-      background:var(--modalBg);color:var(--modalInk);
-      border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden
+      width:100%; max-width:560px;
+      background:var(--modalBg); color:var(--modalInk);
+      border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.25); overflow:hidden;
+      z-index:1001;
     }
     .modal header{
-      padding:20px 24px;border-bottom:1px solid rgba(248,246,242,.1);
-      display:flex;align-items:center;justify-content:space-between;background:transparent
+      padding:20px 24px; border-bottom:1px solid rgba(248,246,242,.1);
+      display:flex; align-items:center; justify-content:space-between; background:transparent;
     }
-    .modal header h2{margin:0;font-size:20px;color:var(--modalInk)}
-    .modal .modal-body{padding:20px 24px;background:transparent}
-    .modal .row{display:grid;gap:12px;margin-bottom:14px}
-    .modal label{font-size:14px;color:var(--modalInk)}
+    .modal header h2{margin:0; font-size:20px; color:var(--modalInk)}
+    .modal .modal-body{padding:20px 24px; background:transparent}
+    .modal .row{display:grid; gap:12px; margin-bottom:14px}
+    .modal label{font-size:14px; color:var(--modalInk)}
     .modal input,.modal textarea,.modal select{
-      width:100%;padding:12px 12px;border-radius:10px;font-size:15px;outline:none;
-      background:#0f1c27;color:#e9edf1;border:1px solid rgba(248,246,242,.2)
+      width:100%; padding:12px 12px; border-radius:10px; font-size:15px; outline:none;
+      background:#0f1c27; color:#e9edf1; border:1px solid rgba(248,246,242,.2)
     }
-    .modal textarea{min-height:120px;resize:vertical}
+    .modal textarea{min-height:120px; resize:vertical}
     .modal input::placeholder,.modal textarea::placeholder{color:#9fb1bf}
-    .modal .actions{display:flex;gap:12px;justify-content:flex-end;padding:16px 0 0;background:transparent}
-    .is-open{display:flex}
-    .helper{font-size:12px;color:#cfd6db;margin-top:-6px}
-    .success-copy{color:var(--modalInk);margin:0 0 10px}
-    .inline-link{color:#cfe07a;text-decoration:underline}
+    .modal .actions{display:flex; gap:12px; justify-content:flex-end; padding:16px 0 0; background:transparent}
+    .is-open{display:flex; pointer-events:auto}
+    .helper{font-size:12px; color:#cfd6db; margin-top:-6px}
+    .success-copy{color:var(--modalInk); margin:0 0 10px}
+    .inline-link{color:#cfe07a; text-decoration:underline}
   </style>
 </head>
 <body>
@@ -121,8 +185,8 @@
       <div class="container">
         <div class="hero">
           <div class="heading"><h1>Establish Your Sovereignty</h1></div>
-          <img class="hero-image" src="/lk-mark-01.png" alt="Labelkid mark">
-          <div class="buttons"><button class="btn btn-primary">See what happens next</button></div>
+          <img class="hero-image" src="/lk-mark-01.png" alt="Labelkid mark" width="602" height="602" loading="eager" />
+          <div class="buttons"><button class="btn btn-primary" type="button">See what happens next</button></div>
         </div>
       </div>
     </section>
@@ -132,8 +196,8 @@
       <div class="container">
         <div class="hero">
           <div class="heading"><h1>Establish Your Sovereignty</h1></div>
-          <img class="hero-image" src="/lk-mark-01.png" alt="Labelkid mark">
-          <div class="buttons"><button class="btn btn-primary">See what happens next</button></div>
+          <img class="hero-image" src="/lk-mark-01.png" alt="Labelkid mark" width="393" height="393" loading="lazy" />
+          <div class="buttons"><button class="btn btn-primary" type="button">See what happens next</button></div>
         </div>
       </div>
     </section>
@@ -143,8 +207,8 @@
       <div class="container">
         <div class="hero">
           <div class="heading"><h1>Establish Your Sovereignty</h1></div>
-          <img class="hero-image" src="/lk-mark-01.png" alt="Labelkid mark">
-          <div class="buttons"><button class="btn btn-primary">See what happens next</button></div>
+          <img class="hero-image" src="/lk-mark-01.png" alt="Labelkid mark" width="253" height="253" loading="lazy" />
+          <div class="buttons"><button class="btn btn-primary" type="button">See what happens next</button></div>
         </div>
       </div>
     </section>
@@ -155,7 +219,7 @@
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
       <header>
         <h2 id="contactTitle">Get in touch — Artists first, everyone welcome.</h2>
-        <button id="closeModal" class="btn btn-secondary" aria-label="Close">Close</button>
+        <button id="closeModal" class="btn btn-secondary" type="button" aria-label="Close">Close</button>
       </header>
 
       <div class="modal-body">
@@ -204,7 +268,7 @@
 
           <div class="row" style="margin-top:4px;">
             <label style="display:flex; gap:8px; align-items:center;">
-              <input id="consent" type="checkbox" required>
+              <input id="consent" type="checkbox" required />
               I agree to be contacted.
             </label>
           </div>
@@ -224,7 +288,7 @@
             Thanks for your interest. Sincerely. We think you’re gonna love what we’re making. We will be in touch.
           </p>
           <div class="actions" style="justify-content:flex-end; padding:0;">
-            <button class="btn btn-primary" id="closeSuccess">Close</button>
+            <button class="btn btn-primary" id="closeSuccess" type="button">Close</button>
           </div>
         </div>
       </div>
@@ -232,7 +296,8 @@
   </div>
 
   <script>
-    const openBtn = document.querySelector('.btn-primary'); // first CTA on page
+    // Attach to ALL visible CTAs (desktop/tablet/mobile)
+    const openBtns = document.querySelectorAll('.btn-primary');
     const modal = document.getElementById('contactModal');
     const closeBtn = document.getElementById('closeModal');
     const cancelBtn = document.getElementById('cancelModal');
@@ -251,10 +316,9 @@
     function closeModal(){
       modal.classList.remove('is-open');
       modal.setAttribute('aria-hidden','true');
-      openBtn?.focus();
     }
 
-    openBtn?.addEventListener('click', openModal);
+    openBtns.forEach(btn => btn.addEventListener('click', openModal));
     closeBtn?.addEventListener('click', closeModal);
     cancelBtn?.addEventListener('click', closeModal);
     modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
@@ -282,4 +346,38 @@
 
       submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
       try{
-        const fd = new
+        const fd = new FormData(form);
+        const role = form.querySelector('input[name="role"]:checked')?.value || '';
+        fd.append('role', role);
+        fd.append('ref', document.getElementById('ref')?.value || '');
+
+        const res = await fetch(form.action,{ method:'POST', body:fd });
+        const json = await res.json().catch(()=>({}));
+
+        if(res.ok && json.ok){
+          form.style.display='none';
+          successState.style.display='block';
+          window.gtag && gtag('event','contact_submit_success');
+        }else{
+          alert(json?.error ? `Error: ${json.error}` : 'Sorry, something went wrong.');
+          console.error(json);
+          window.gtag && gtag('event','contact_submit_error');
+        }
+      }catch(err){
+        alert('Network error. Please try again.');
+        console.error(err);
+        window.gtag && gtag('event','contact_submit_network_error');
+      }finally{
+        submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
+      }
+    });
+
+    closeSuccess?.addEventListener('click', ()=>{
+      form.reset();
+      form.style.display='block';
+      successState.style.display='none';
+      closeModal();
+    });
+  </script>
+</body>
+</html>
