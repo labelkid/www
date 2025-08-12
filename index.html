@@ -19,7 +19,10 @@
   <meta property="og:title" content="Label Kid — Establish Your Sovereignty" />
   <meta property="og:description" content="Label Kid is the trusted layer for indie music ops — catalog, rights, splits, and data sovereignty. All with privacy and auditability by design. Its about time!" />
   <meta property="og:image" content="https://labelkid.io/lk-mark-01.png" />
-
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Label Kid — Establish Your Sovereignty" />
+  <meta name="twitter:description" content="Label Kid is the trusted layer for indie music ops — catalog, rights, splits, and data sovereignty. All with privacy and auditability by design. Its about time!" />
+  <meta name="twitter:image" content="https://labelkid.io/lk-mark-01.png" />
 
   <!-- Organization Schema -->
   <script type="application/ld+json">
@@ -59,14 +62,15 @@
 
   <style>
     :root{
-      --ink:#122433;          /* text color */
-      --paper:#F8F6F2;        /* page background */
-      --cta:#A8C04B;          /* buttons */
-      --ctaText:#122433;      /* button text */
+      --ink:#F8F6F2;          /* global text color: always off-white */
+      --paper:#F8F6F2;        /* landing background */
+      --brand:#122433;        /* primary brand / button bg */
+      --accent:#A8C04B;       /* secondary accent if needed */
       --modalBg:#122433;      /* modal background */
       --modalInk:#F8F6F2;     /* modal text */
-      --gap-lg:48px; --gap-md:32px; --gap-sm:16px;
-      --radius:12px;
+      --gap-xl:56px; --gap-lg:40px; --gap-md:24px; --gap-sm:14px; --gap-xs:8px;
+      --radius:12px; --radius-lg:16px;
+      --fieldBg:#0f1c27; --fieldInk:#e9edf1; --fieldBorder:rgba(248,246,242,.20);
     }
 
     /* Reset + base */
@@ -74,8 +78,8 @@
     html,body{height:100%;margin:0}
     body{
       min-height:100%;
-      background:var(--paper);   /* per request: #F8F6F2 */
-      color:var(--ink);          /* per request: #122433 */
+      background:var(--paper);
+      color:var(--brand); /* headings on LP; form uses modalInk */
       font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
       text-rendering:optimizeLegibility;
       -webkit-font-smoothing:antialiased;
@@ -83,46 +87,27 @@
     }
     img{max-width:100%;height:auto;display:block}
 
-    /* Layout: perfectly centered hero with consistent spacing */
-    .wrap{
-      min-height:100dvh;
-      display:grid;
-      place-items:center;   /* center both axes */
-      padding:24px;
-    }
-    .panel{
-      width:100%;
-      max-width:1280px;
-      background:transparent;
-      display:flex;justify-content:center;align-items:center;
-    }
-    .container{
-      width:100%;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
-    }
-    .hero{
-      width:100%;
-      display:flex;flex-direction:column;align-items:center;justify-content:center;
-      gap:var(--gap-lg);
-      padding:120px 64px;
-    }
-    .heading{
-      width:100%;max-width:1100px;display:flex;justify-content:center;text-align:center
-    }
-    .heading h1{margin:0;color:var(--ink);font-weight:900;line-height:1.1;font-size:64px}
+    /* Layout: centered hero */
+    .wrap{min-height:100dvh;display:grid;place-items:center;padding:24px}
+    .panel{width:100%;max-width:1280px;display:flex;justify-content:center;align-items:center}
+    .container{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .hero{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--gap-lg);padding:120px 64px}
+    .heading{width:100%;max-width:1100px;display:flex;justify-content:center;text-align:center}
+    .heading h1{margin:0;color:#122433;font-weight:900;line-height:1.1;font-size:64px}
     .hero-image{width:602px;max-width:100%;aspect-ratio:1/1}
     .buttons{display:inline-flex;gap:var(--gap-sm);flex-wrap:wrap;align-content:center;background:transparent;position:relative;z-index:1}
 
     /* Buttons */
     .btn{
       appearance:none;border:0;border-radius:var(--radius);
-      padding:12px 16px;cursor:pointer;font-weight:600;line-height:1.45;
+      padding:12px 18px;cursor:pointer;font-weight:700;line-height:1.45;
       -webkit-tap-highlight-color:transparent; touch-action:manipulation;
-      transition:transform .04s ease, filter .2s ease;
+      transition:transform .04s ease, filter .15s ease, background .15s ease, color .15s ease;
+      color:var(--ink); /* default text color is off-white */
     }
     .btn:active{transform:translateY(1px)}
-    .btn-primary{background:var(--cta);color:var(--ctaText)}
-    .btn-secondary{background:transparent;color:var(--modalInk);border:1px solid rgba(248,246,242,.25)}
+    .btn-primary{background:var(--brand);color:#F8F6F2} /* Request 1: brand bg, off-white text */
+    .btn-secondary{background:transparent;color:#F8F6F2;border:1px solid rgba(248,246,242,.35)}
     .btn[disabled]{opacity:.6;pointer-events:none}
 
     /* Tablet */
@@ -130,14 +115,14 @@
     .panel.tablet .hero{padding:96px 32px;gap:var(--gap-md)}
     .panel.tablet .heading h1{font-size:56px}
     .panel.tablet .hero-image{width:393px}
-    .panel.tablet .btn-primary{font-size:12px}
+    .panel.tablet .btn-primary{font-size:14px}
 
     /* Mobile */
     .panel.mobile{max-width:375px}
     .panel.mobile .hero{padding:80px 24px;gap:var(--gap-md)}
     .panel.mobile .heading h1{font-size:40px}
     .panel.mobile .hero-image{width:253px}
-    .panel.mobile .btn-primary{font-size:11px}
+    .panel.mobile .btn-primary{font-size:13px}
 
     /* Responsive visibility */
     .panel.desktop{display:none}
@@ -152,33 +137,63 @@
       position:fixed; inset:0;
       background:rgba(0,0,0,.45);
       display:none; align-items:center; justify-content:center;
-      padding:24px; z-index:1000; pointer-events:none; /* avoid intercepting taps when closed */
+      padding:24px; z-index:1000; pointer-events:none;
     }
+    .is-open{display:flex; pointer-events:auto}
     .modal{
-      width:100%; max-width:560px;
+      width:100%; max-width:720px;
       background:var(--modalBg); color:var(--modalInk);
-      border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,.25); overflow:hidden;
+      border-radius:var(--radius-lg); box-shadow:0 20px 60px rgba(0,0,0,.25); overflow:hidden;
       z-index:1001;
     }
-    .modal header{
-      padding:20px 24px; border-bottom:1px solid rgba(248,246,242,.1);
-      display:flex; align-items:center; justify-content:space-between; background:transparent;
+
+    /* Modal header (no top "Close" button per 2a) */
+    .modal header{padding:24px 28px;border-bottom:1px solid rgba(248,246,242,.08)}
+    .modal header h2{margin:0;font-size:28px;line-height:1.2;color:var(--modalInk)}
+
+    .modal .modal-body{padding:24px 28px}
+    /* 2b: helper as H4 scale */
+    .helper-title{font-size:18px;line-height:1.4;margin:0 0 var(--gap-md);color:#cfd6db}
+
+    /* Form layout: spacious, aligned */
+    form .group{margin-bottom:var(--gap-md)}
+    form .group.large-gap{margin-bottom:var(--gap-lg)}
+    .label-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--gap-xs)}
+    label.form-label{font-size:14px;color:var(--modalInk)}
+    .required-badge{font-size:12px;color:#cfe07a}
+
+    input[type="text"], input[type="email"], select, textarea{
+      width:100%;padding:14px 14px;border-radius:10px;font-size:15px;outline:none;
+      background:var(--fieldBg);color:var(--fieldInk);border:1px solid var(--fieldBorder)
     }
-    .modal header h2{margin:0; font-size:20px; color:var(--modalInk)}
-    .modal .modal-body{padding:20px 24px; background:transparent}
-    .modal .row{display:grid; gap:12px; margin-bottom:14px}
-    .modal label{font-size:14px; color:var(--modalInk)}
-    .modal input,.modal textarea,.modal select{
-      width:100%; padding:12px 12px; border-radius:10px; font-size:15px; outline:none;
-      background:#0f1c27; color:#e9edf1; border:1px solid rgba(248,246,242,.2)
-    }
-    .modal textarea{min-height:120px; resize:vertical}
-    .modal input::placeholder,.modal textarea::placeholder{color:#9fb1bf}
-    .modal .actions{display:flex; gap:12px; justify-content:flex-end; padding:16px 0 0; background:transparent}
-    .is-open{display:flex; pointer-events:auto}
-    .helper{font-size:12px; color:#cfd6db; margin-top:-6px}
-    .success-copy{color:var(--modalInk); margin:0 0 10px}
-    .inline-link{color:#cfe07a; text-decoration:underline}
+    textarea{min-height:140px;resize:vertical}
+    input::placeholder, textarea::placeholder{color:#9fb1bf}
+
+    /* Radios: tidy grid, aligned bullets */
+    .radio-stack{display:grid;gap:10px;margin-top:6px}
+    .radio-item{display:flex;align-items:center;gap:10px}
+    .radio-item input{accent-color:#cfe07a;width:18px;height:18px}
+
+    /* Consent row: keep checkbox close to label (2e) */
+    .consent-row{display:flex;align-items:center;gap:10px;margin-top:6px}
+    .consent-row input{accent-color:#cfe07a;width:18px;height:18px}
+
+    /* Action row */
+    .actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:var(--gap-lg)}
+    .actions .left a{color:#cfe07a;text-decoration:underline}
+
+    /* Inline validation (2g) */
+    .error{color:#ffb3b3;font-size:12px;margin-top:6px;display:none}
+    .invalid input, .invalid textarea, .invalid select{border-color:#ff8a8a}
+    .invalid .error{display:block}
+
+    /* Success state (2h) */
+    .success-pane{display:none;padding:28px}
+    .success-title{font-size:28px;margin:0 0 var(--gap-md)}
+    .success-copy{font-size:18px;margin:0 0 var(--gap-lg);color:var(--modalInk)}
+
+    /* Ensure all text in modal off-white; no #fff anywhere */
+    .modal, .modal *{color-scheme:dark}
   </style>
 </head>
 <body>
@@ -228,43 +243,69 @@
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
       <header>
         <h2 id="contactTitle">Get in touch — Artists first, everyone welcome.</h2>
-        <button id="closeModal" class="btn btn-secondary" type="button" aria-label="Close">Close</button>
+        <!-- 2a: removed top Close button -->
       </header>
 
       <div class="modal-body">
-        <p class="helper">What brings you here today? We’ll follow up.</p>
+        <p class="helper-title">What brings you here today? We’ll follow up.</p>
 
         <form id="contactForm" action="/api/contact" method="POST" novalidate>
-          <div class="row">
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" autocomplete="name" required />
-          </div>
-
-          <div class="row">
-            <label for="email">Email</label>
-            <input id="email" name="_replyto" type="email" autocomplete="email" required />
-          </div>
-
-          <fieldset class="row" style="border:0; padding:0; margin:0 0 14px;">
-            <legend style="font-size:14px; margin-bottom:8px; color:var(--modalInk);">I am…</legend>
-            <div style="display:grid; gap:8px;">
-              <label><input type="radio" name="role" value="Artist/Creator" required> Artist/Creator</label>
-              <label><input type="radio" name="role" value="Label/Manager" required> Label/Manager</label>
-              <label><input type="radio" name="role" value="Investor/Partner" required> Investor/Partner</label>
-              <label><input type="radio" name="role" value="Other" required> Other</label>
+          <!-- Name -->
+          <div class="group large-gap" id="grp-name">
+            <div class="label-row">
+              <label for="name" class="form-label">Name</label>
+              <span class="required-badge">Required</span>
             </div>
-          </fieldset>
-
-          <div class="row">
-            <label for="message">What brings you here?</label>
-            <textarea id="message" name="message" maxlength="160" placeholder="Catalog chaos, royalties, collaboration, etc." required></textarea>
-            <div class="helper"><span id="charLeft">160</span> characters left</div>
+            <input id="name" name="name" type="text" autocomplete="name" required />
+            <p class="error">Please enter your name.</p>
           </div>
 
-          <div class="row">
-            <label for="ref">How did you hear about Label Kid?</label>
-            <select id="ref" name="ref">
-              <option value="">Select one (optional)</option>
+          <!-- Email -->
+          <div class="group large-gap" id="grp-email">
+            <div class="label-row">
+              <label for="email" class="form-label">Email</label>
+              <span class="required-badge">Required</span>
+            </div>
+            <input id="email" name="_replyto" type="email" autocomplete="email" required />
+            <p class="error">Enter a valid email address.</p>
+          </div>
+
+          <!-- Role -->
+          <div class="group large-gap" id="grp-role">
+            <div class="label-row">
+              <label class="form-label">I am…</label>
+              <span class="required-badge">Required</span>
+            </div>
+            <div class="radio-stack" role="radiogroup" aria-label="I am">
+              <label class="radio-item"><input type="radio" name="role" value="Artist/Creator" required> Artist/Creator</label>
+              <label class="radio-item"><input type="radio" name="role" value="Label/Manager" required> Label/Manager</label>
+              <label class="radio-item"><input type="radio" name="role" value="Investor/Partner" required> Investor/Partner</label>
+              <label class="radio-item"><input type="radio" name="role" value="Other" required> Other</label>
+            </div>
+            <p class="error">Please choose one.</p>
+          </div>
+
+          <!-- Message -->
+          <div class="group large-gap" id="grp-message">
+            <div class="label-row">
+              <label for="message" class="form-label">What brings you here?</label>
+              <span class="required-badge">Required</span>
+            </div>
+            <textarea id="message" name="message" maxlength="160" placeholder="Catalog chaos, royalties, collaboration, etc." required></textarea>
+            <div class="label-row" style="margin-top:6px;">
+              <span class="helper"><span id="charLeft">160</span> characters left</span>
+            </div>
+            <p class="error">Tell us a bit so we can route your note.</p>
+          </div>
+
+          <!-- Ref -->
+          <div class="group" id="grp-ref">
+            <div class="label-row">
+              <label for="ref" class="form-label">How did you hear about Label Kid?</label>
+              <span class="required-badge">Required</span>
+            </div>
+            <select id="ref" name="ref" required>
+              <option value="" disabled selected>Select one</option>
               <option>Friend/Artist</option>
               <option>Discord/Reddit</option>
               <option>Social</option>
@@ -273,30 +314,37 @@
               <option>Event</option>
               <option>Other</option>
             </select>
+            <p class="error">Please select an option.</p>
           </div>
 
-          <div class="row" style="margin-top:4px;">
-            <label style="display:flex; gap:8px; align-items:center;">
+          <!-- Consent -->
+          <div class="group" id="grp-consent">
+            <div class="consent-row">
               <input id="consent" type="checkbox" required />
-              I agree to be contacted.
-            </label>
+              <label for="consent" class="form-label">I agree to be contacted.</label>
+            </div>
+            <p class="error">Please agree so we can reach you.</p>
           </div>
 
-          <div class="actions" style="display:flex; align-items:center; justify-content:space-between;">
-            <a href="mailto:ben@labelkid.io" class="inline-link">Prefer email? ben@labelkid.io</a>
-            <div style="display:flex; gap:12px;">
+          <!-- Actions -->
+          <div class="actions">
+            <div class="left">
+              <a href="mailto:ben@labelkid.io" aria-label="Prefer email?">Prefer email?</a>
+            </div>
+            <div class="right" style="display:flex;gap:12px;">
               <button type="button" class="btn btn-secondary" id="cancelModal">Cancel</button>
               <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
             </div>
           </div>
         </form>
 
-        <!-- Success state -->
-        <div id="successState" style="display:none; padding:12px 0;">
+        <!-- Success state (clean, one close, no helper) -->
+        <div id="successState" class="success-pane">
+          <h3 class="success-title">Thanks for your interest.</h3>
           <p class="success-copy">
-            Thanks for your interest. Sincerely. We think you’re gonna love what we’re making. We will be in touch.
+            We think you’re gonna love what we’re making. We’ll be in touch soon.
           </p>
-          <div class="actions" style="justify-content:flex-end; padding:0;">
+          <div style="display:flex;justify-content:flex-end;">
             <button class="btn btn-primary" id="closeSuccess" type="button">Close</button>
           </div>
         </div>
@@ -305,10 +353,9 @@
   </div>
 
   <script>
-    // Bind only the landing CTA buttons (avoid selecting modal submit)
+    // Landing CTA only
     const openBtns = document.querySelectorAll('.js-open-modal');
     const modal = document.getElementById('contactModal');
-    const closeBtn = document.getElementById('closeModal');
     const cancelBtn = document.getElementById('cancelModal');
     const form = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
@@ -328,7 +375,6 @@
     }
 
     openBtns.forEach(btn => btn.addEventListener('click', openModal));
-    closeBtn?.addEventListener('click', closeModal);
     cancelBtn?.addEventListener('click', closeModal);
     modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
     document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.classList.contains('is-open')) closeModal(); });
@@ -339,17 +385,64 @@
       if(charLeft) charLeft.textContent = Math.max(0,left);
     });
 
-    // Submit with inline success UI
+    // Inline validation helpers (2g)
+    const groups = {
+      name: document.getElementById('grp-name'),
+      email: document.getElementById('grp-email'),
+      role: document.getElementById('grp-role'),
+      message: document.getElementById('grp-message'),
+      ref: document.getElementById('grp-ref'),
+      consent: document.getElementById('grp-consent')
+    };
+
+    function setInvalid(groupEl, invalid){
+      if(!groupEl) return;
+      groupEl.classList.toggle('invalid', invalid);
+    }
+
+    function validate(){
+      let ok = true;
+
+      const name = form.name.value.trim();
+      setInvalid(groups.name, name === '');
+      ok = ok && name !== '';
+
+      const email = (form._replyto?.value || '').trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      setInvalid(groups.email, !emailOk);
+      ok = ok && emailOk;
+
+      const hasRole = !!form.querySelector('input[name="role"]:checked');
+      setInvalid(groups.role, !hasRole);
+      ok = ok && hasRole;
+
+      const messageOk = (msg.value.trim().length > 0);
+      setInvalid(groups.message, !messageOk);
+      ok = ok && messageOk;
+
+      const refOk = (document.getElementById('ref')?.value || '') !== '';
+      setInvalid(groups.ref, !refOk);
+      ok = ok && refOk;
+
+      const consentOk = document.getElementById('consent').checked;
+      setInvalid(groups.consent, !consentOk);
+      ok = ok && consentOk;
+
+      return ok;
+    }
+
+    // Re-validate on input/change
+    form?.addEventListener('input', (e)=>{ validate(); });
+    form?.addEventListener('change', (e)=>{ validate(); });
+
+    // Submit with inline validation + success UI
     form?.addEventListener('submit', async (e)=>{
       e.preventDefault();
 
-      const name = form.name.value.trim();
-      const email = (form._replyto?.value || form.email?.value || "").trim();
-      const hasRole = !!form.querySelector('input[name="role"]:checked');
-      const consent = document.getElementById('consent').checked;
-
-      if(!name || !email || !msg.value.trim() || !hasRole || !consent){
-        alert('Please complete all required fields and consent.');
+      if(!validate()){
+        // Focus first invalid field
+        const firstInvalid = document.querySelector('.invalid input, .invalid textarea, .invalid select');
+        firstInvalid?.focus();
         return;
       }
 
@@ -358,7 +451,6 @@
         const fd = new FormData(form);
         const role = form.querySelector('input[name="role"]:checked')?.value || '';
         fd.append('role', role);
-        fd.append('ref', document.getElementById('ref')?.value || '');
 
         const res = await fetch(form.action,{ method:'POST', body:fd });
         const json = await res.json().catch(()=>({}));
@@ -368,21 +460,23 @@
           successState.style.display='block';
           window.gtag && gtag('event','contact_submit_success');
         }else{
-          alert(json?.error ? `Error: ${json.error}` : 'Sorry, something went wrong.');
-          console.error(json);
+          // Graceful inline error at top of form
+          submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
+          alert('Sorry, something went wrong submitting the form. Please try again.');
           window.gtag && gtag('event','contact_submit_error');
         }
       }catch(err){
+        submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
         alert('Network error. Please try again.');
         console.error(err);
         window.gtag && gtag('event','contact_submit_network_error');
-      }finally{
-        submitBtn.disabled = false; submitBtn.textContent = 'Send Message';
       }
     });
 
     closeSuccess?.addEventListener('click', ()=>{
       form.reset();
+      // reset validation UI
+      Object.values(groups).forEach(g => g.classList.remove('invalid'));
       form.style.display='block';
       successState.style.display='none';
       closeModal();
