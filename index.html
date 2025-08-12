@@ -258,7 +258,6 @@
           <img class="hero-image" src="/lk-mark-01.png" alt="Labelkid mark" width="253" height="253" loading="lazy" />
           <div class="buttons">
             <button class="btn btn-primary js-open-modal" type="button">See what happens next</button>
-          </div>
         </div>
       </div>
     </section>
@@ -290,8 +289,7 @@
                         <div class="group large-gap" id="grp-role">
               <label class="form-label">I am…<span class="required-asterisk">*</span></label>
               <div class="radio-stack" role="radiogroup" aria-label="I am">
-                <label class="radio-item"><input type="radio" name="role" value="Artist/Band" required> Artist/Band</label>
-               <label class="radio-item"><input type="radio" name="role" value="Producer/Engineer" required> Producer/Engineer</label>
+                <label class="radio-item"><input type="radio" name="role" value="Artist/Creator" required> Artist/Creator</label>
                 <label class="radio-item"><input type="radio" name="role" value="Label/Manager" required> Label/Manager</label>
                 <label class="radio-item"><input type="radio" name="role" value="Investor/Partner" required> Investor/Partner</label>
                 <label class="radio-item"><input type="radio" name="role" value="Other" required> Other</label>
@@ -310,9 +308,12 @@
               <label for="ref" class="form-label">How did you hear about Label Kid?<span class="required-asterisk">*</span></label>
               <select id="ref" name="ref" required>
                 <option value="" disabled selected>Select one</option>
-                <option>Artist</option>
-                <option>Friend</option>
-                <option>Colleague</option>
+                <option>Friend/Artist</option>
+                <option>Discord/Reddit</option>
+                <option>Social</option>
+                <option>Search</option>
+                <option>Press/Blog</option>
+                <option>Event</option>
                 <option>Other</option>
               </select>
               <p class="error">Please select an option.</p>
@@ -333,8 +334,8 @@
               <div class="right" style="display:flex;gap:12px;">
                 <button type="button" class="btn btn-secondary" id="cancelModal">Cancel</button>
                 <button type="submit" class="btn btn-positive" id="submitBtn">Send Message</button>
-              </div>
             </div>
+          </div>
           </form>
         </div>
       </div>
