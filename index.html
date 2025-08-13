@@ -114,94 +114,109 @@
     @media (max-width:767.98px){.panel.mobile{display:flex}}
 
     /* Modal */
-    .modal-backdrop{
-      position:fixed; inset:0;
-      background:rgba(0,0,0,.45);
-      display:none; align-items:center; justify-content:center;
-      padding:24px; z-index:1000; pointer-events:none;
-      /* Allow the backdrop itself to scroll if content needs more vertical space */
-      overflow:auto;
-    }
-    .is-open{display:flex; pointer-events:auto}
+/* Backdrop scroll container (iOS-friendly) */
+.modal-backdrop{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.45);
+  display:none; align-items:center; justify-content:center;
+  padding:24px; z-index:1000; pointer-events:none;
+  overflow:auto;                     /* outer scroll */
+  -webkit-overflow-scrolling:touch;  /* momentum scroll on iOS */
+  touch-action:manipulation;         /* allow touch scrolling */
+}
+.is-open{display:flex; pointer-events:auto}
 
-    /* The scrollable dialog container */
-    .modal{
-      width:100%;
-      max-width:540px;
-      background:var(--brand); color:var(--text-on-dark);
-      border-radius:var(--radius-lg);
-      box-shadow:0 20px 60px rgba(0,0,0,.25);
-      overflow:hidden;
-      z-index:1001;
-      display:flex; flex-direction:column;
-      /* Critical for mobile: keep dialog within viewport and enable internal scroll */
-      max-height:100dvh;
-      height:auto;
-    }
+/* Dialog stays within viewport; content can be taller */
+.modal{
+  width:100%;
+  max-width:540px;
+  background:var(--brand); color:var(--text-on-dark);
+  border-radius:var(--radius-lg);
+  box-shadow:0 20px 60px rgba(0,0,0,.25);
+  overflow:hidden;
+  z-index:1001;
+  display:flex; flex-direction:column;
+  max-height:100dvh;                 /* keep within visible viewport */
+}
 
-    /* Make only the body area scroll, keeping header/actions pinned */
-    .modal header{padding:24px 28px 12px 28px;border-bottom:1px solid rgba(248,246,242,.08); flex:0 0 auto}
-    .modal .modal-body{
-      padding:24px 28px;
-      overflow:auto;
-      -webkit-overflow-scrolling:touch;
-      flex:1 1 auto;
-      min-height:0;
-    }
+/* Header fixed; body grows but lets outer container own scrolling */
+.modal header{
+  padding:24px 28px 12px 28px;
+  border-bottom:1px solid rgba(248,246,242,.08);
+  flex:0 0 auto;
+}
+.modal .modal-body{
+  padding:24px 28px;
+  flex:1 1 auto;
+  min-height:0;                      /* allow shrink inside flex */
+  overflow:visible;                  /* scrolling handled by backdrop */
+}
 
-    /* Form controls stay fluid */
-    input[type="text"], input[type="email"], select, textarea{
-      width:100%; padding:14px 14px; border-radius:10px; font-size:16px; /* 16px prevents iOS zoom */
-      outline:none; background:var(--fieldBg); color:var(--fieldInk); border:1px solid var(--fieldBorder);
-    }
-    textarea{min-height:140px;resize:vertical}
-    input::placeholder, textarea::placeholder{color:#9fb1bf}
-    .radio-stack{display:grid;gap:10px;margin-top:6px}
-    .radio-item{display:flex;align-items:center;gap:10px}
-    .radio-item input{accent-color:#cfe07a;width:18px;height:18px}
-    .consent-row{display:flex;align-items:center;gap:10px;margin-top:6px}
-    .consent-row input{accent-color:#cfe07a;width:18px;height:18px}
-    .actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:var(--gap-lg)}
-    .actions .left a{color:#cfe07a;text-decoration:underline}
-    .error{color:#ffb3b3;font-size:12px;margin-top:6px;display:none}
-    .invalid input, .invalid textarea, .invalid select{border-color:#ff8a8a}
-    .invalid .error{display:block}
+/* Form controls stay fluid */
+input[type="text"], input[type="email"], select, textarea{
+  width:100%; padding:14px 14px; border-radius:10px; font-size:16px; /* prevent iOS zoom */
+  outline:none; background:var(--fieldBg); color:var(--fieldInk); border:1px solid var(--fieldBorder);
+}
+textarea{min-height:140px;resize:vertical}
+input::placeholder, textarea::placeholder{color:#9fb1bf}
+.radio-stack{display:grid;gap:10px;margin-top:6px}
+.radio-item{display:flex;align-items:center;gap:10px}
+.radio-item input{accent-color:#cfe07a;width:18px;height:18px}
+.consent-row{display:flex;align-items:center;gap:10px;margin-top:6px}
+.consent-row input{accent-color:#cfe07a;width:18px;height:18px}
+.actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:var(--gap-lg)}
+.actions .left a{color:#cfe07a;text-decoration:underline}
+.error{color:#ffb3b3;font-size:12px;margin-top:6px;display:none}
+.invalid input, .invalid textarea, .invalid select{border-color:#ff8a8a}
+.invalid .error{display:block}
 
-    /* Confirmation success modal */
-    .success-pane{
-      display:none;
-      flex-direction:column;
-      align-items:center;
-      padding:40px 32px;
-      text-align:center;
-      min-height:340px;
-      justify-content:center;
-    }
-    .success-title{
-      font-size:2rem;
-      font-weight:900;
-      margin:0 0 18px 0;
-      letter-spacing:-.01em;
-    }
-    .success-copy{
-      font-size:1.18rem;
-      margin:0 0 38px 0;
-    }
-    .success-actions{
-      width:100%;
-      display:flex;
-      justify-content:center;
-      gap:12px;
-    }
-    .success-actions .btn-positive{
-      min-width:120px;
-      font-size:1rem;
-    }
+/* Confirmation success modal */
+.success-pane{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  padding:40px 32px;
+  text-align:center;
+  justify-content:center;
+  max-height:calc(100dvh - 48px);    /* remain within backdrop padding */
+}
+.success-title{
+  font-size:2rem;
+  font-weight:900;
+  margin:0 0 18px 0;
+  letter-spacing:-.01em;
+}
+.success-copy{
+  font-size:1.18rem;
+  margin:0 0 38px 0;
+}
+.success-actions{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  gap:12px;
+}
+.success-actions .btn-positive{
+  min-width:120px;
+  font-size:1rem;
+}
 
-    /* When modal is open, lock background scroll */
-    body.modal-open{ overflow:hidden; height:100dvh }
+/* When modal is open, lock background scroll */
+body.modal-open{ overflow:hidden; height:100dvh }
 
-    .modal, .modal *{color-scheme:dark}
+.modal, .modal *{color-scheme:dark}
+
+/* Mobile-specific tightening (unchanged) */
+@media (max-width: 480px){
+  .modal{ max-width:95vw; border-radius:10px }
+  .modal header{ padding:16px 16px 10px 16px }
+  .modal .modal-body{ padding:16px }
+  .actions{ flex-wrap:wrap; gap:10px }
+  .actions .right{ width:100%; justify-content:flex-end }
+  .btn{ padding:12px 14px }
+  textarea{ min-height:120px }
+}
+
   </style>
 </head>
 <body>
