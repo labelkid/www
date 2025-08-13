@@ -4,7 +4,6 @@
   <!-- Basic -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
   <!-- SEO -->
   <title>Label Kid — Establish Your Sovereignty</title>
   <meta name="description" content="Label Kid is the trusted layer for indie music ops — catalog, rights, splits, and data sovereignty. All with privacy and auditability by design. Its about time!" />
@@ -12,15 +11,12 @@
   <link rel="canonical" href="https://labelkid.io/" />
   <meta name="theme-color" content="#122433" />
   <meta name="keywords" content="label kid, labelkid, music rights, indie artists, catalog management, royalties, payouts, auditability" />
-
   <!-- Social -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://labelkid.io/" />
   <meta property="og:title" content="Label Kid — Establish Your Sovereignty" />
   <meta property="og:description" content="Label Kid is the trusted layer for indie music ops — catalog, rights, splits, and data sovereignty. All with privacy and auditability by design. Its about time!" />
   <meta property="og:image" content="https://labelkid.io/lk-mark-01.png" />
-  
-
   <!-- Organization Schema -->
   <script type="application/ld+json">
   {
@@ -32,13 +28,11 @@
     "sameAs": []
   }
   </script>
-
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
   <link rel="preload" as="image" href="/lk-mark-01.png" />
-
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
@@ -47,7 +41,6 @@
   <link rel="icon" type="image/x-icon" href="/favicon_io/favicon.ico" />
   <link rel="icon" sizes="192x192" href="/favicon_io/android-chrome-192x192.png" />
   <link rel="icon" sizes="512x512" href="/favicon_io/android-chrome-512x512.png" />
-
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZX2ZY9YQXZ"></script>
   <script>
@@ -56,7 +49,6 @@
     gtag('js', new Date());
     gtag('config', 'G-ZX2ZY9YQXZ');
   </script>
-
   <style>
     :root{
       --ink:#122433;           /* primary dark */
@@ -65,16 +57,12 @@
       --mustard:#e1b341;       /* attention */
       --orange:#e1572a;        /* urgent */
       --magenta:#d64391;       /* rare accent */
-
       --brand:#122433;         /* CTA bg */
       --text-on-dark:#F8F6F2;  /* text on dark */
-
       --gap-xl:56px; --gap-lg:40px; --gap-md:24px; --gap-sm:14px; --gap-xs:8px;
       --radius:12px; --radius-lg:16px;
-
       --fieldBg:#0f1c27; --fieldInk:#e9edf1; --fieldBorder:rgba(248,246,242,.20);
     }
-
     *{box-sizing:border-box}
     html,body{height:100%;margin:0}
     body{
@@ -95,7 +83,6 @@
     .heading h1{margin:0;color:#122433;font-weight:900;line-height:1.1;font-size:64px}
     .hero-image{width:602px;max-width:100%;aspect-ratio:1/1}
     .buttons{display:inline-flex;gap:var(--gap-sm);flex-wrap:wrap;align-content:center;position:relative;z-index:1}
-
     .btn{
       appearance:none;border:0;border-radius:var(--radius);
       padding:12px 18px;cursor:pointer;font-weight:700;line-height:1.45;
@@ -107,21 +94,18 @@
     .btn-secondary{background:transparent;color:var(--text-on-dark);border:1px solid rgba(248,246,242,.35)}
     .btn-positive{background:var(--accent-green);color:var(--ink);}
     .btn[disabled]{opacity:.6;pointer-events:none}
-
     /* Tablet */
     .panel.tablet{max-width:800px}
     .panel.tablet .hero{padding:96px 32px;gap:var(--gap-md)}
     .panel.tablet .heading h1{font-size:56px}
     .panel.tablet .hero-image{width:393px}
     .panel.tablet .btn-primary{font-size:14px}
-
     /* Mobile */
     .panel.mobile{max-width:375px}
     .panel.mobile .hero{padding:80px 24px;gap:var(--gap-md)}
     .panel.mobile .heading h1{font-size:40px}
     .panel.mobile .hero-image{width:253px}
     .panel.mobile .btn-primary{font-size:13px}
-
     .panel.desktop{display:none}
     .panel.tablet{display:none}
     .panel.mobile{display:none}
@@ -135,43 +119,50 @@
       background:rgba(0,0,0,.45);
       display:none; align-items:center; justify-content:center;
       padding:24px; z-index:1000; pointer-events:none;
+      /* Allow the backdrop itself to scroll if content needs more vertical space */
+      overflow:auto;
     }
     .is-open{display:flex; pointer-events:auto}
+
+    /* The scrollable dialog container */
     .modal{
-      width:100%; max-width:540px;
+      width:100%;
+      max-width:540px;
       background:var(--brand); color:var(--text-on-dark);
-      border-radius:var(--radius-lg); box-shadow:0 20px 60px rgba(0,0,0,.25); overflow:hidden;
+      border-radius:var(--radius-lg);
+      box-shadow:0 20px 60px rgba(0,0,0,.25);
+      overflow:hidden;
       z-index:1001;
       display:flex; flex-direction:column;
+      /* Critical for mobile: keep dialog within viewport and enable internal scroll */
+      max-height:100dvh;
+      height:auto;
     }
 
-    .modal header{padding:24px 28px 12px 28px;border-bottom:1px solid rgba(248,246,242,.08)}
-    .modal header h2{margin:0;font-size:28px;line-height:1.2}
+    /* Make only the body area scroll, keeping header/actions pinned */
+    .modal header{padding:24px 28px 12px 28px;border-bottom:1px solid rgba(248,246,242,.08); flex:0 0 auto}
+    .modal .modal-body{
+      padding:24px 28px;
+      overflow:auto;
+      -webkit-overflow-scrolling:touch;
+      flex:1 1 auto;
+      min-height:0;
+    }
 
-    .modal .modal-body{padding:24px 28px}
-    .helper-title{font-size:18px;line-height:1.4;margin:0 0 var(--gap-md);color:#cfd6db}
-
-    form .group{margin-bottom:var(--gap-md)}
-    form .group.large-gap{margin-bottom:var(--gap-lg)}
-    label.form-label{display:inline-block;margin-bottom:6px;font-size:14px}
-    .required-asterisk{color:var(--mustard);margin-left:4px;font-weight:700}
+    /* Form controls stay fluid */
     input[type="text"], input[type="email"], select, textarea{
-      width:100%;padding:14px 14px;border-radius:10px;font-size:15px;outline:none;
-      background:var(--fieldBg);color:var(--fieldInk);border:1px solid var(--fieldBorder)
+      width:100%; padding:14px 14px; border-radius:10px; font-size:16px; /* 16px prevents iOS zoom */
+      outline:none; background:var(--fieldBg); color:var(--fieldInk); border:1px solid var(--fieldBorder);
     }
     textarea{min-height:140px;resize:vertical}
     input::placeholder, textarea::placeholder{color:#9fb1bf}
-
     .radio-stack{display:grid;gap:10px;margin-top:6px}
     .radio-item{display:flex;align-items:center;gap:10px}
     .radio-item input{accent-color:#cfe07a;width:18px;height:18px}
-
     .consent-row{display:flex;align-items:center;gap:10px;margin-top:6px}
     .consent-row input{accent-color:#cfe07a;width:18px;height:18px}
-
     .actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:var(--gap-lg)}
     .actions .left a{color:#cfe07a;text-decoration:underline}
-
     .error{color:#ffb3b3;font-size:12px;margin-top:6px;display:none}
     .invalid input, .invalid textarea, .invalid select{border-color:#ff8a8a}
     .invalid .error{display:block}
@@ -207,6 +198,9 @@
       font-size:1rem;
     }
 
+    /* When modal is open, lock background scroll */
+    body.modal-open{ overflow:hidden; height:100dvh }
+
     .modal, .modal *{color-scheme:dark}
   </style>
 </head>
@@ -224,7 +218,6 @@
         </div>
       </div>
     </section>
-
     <!-- Tablet -->
     <section class="panel tablet">
       <div class="container">
@@ -237,7 +230,6 @@
         </div>
       </div>
     </section>
-
     <!-- Mobile -->
     <section class="panel mobile">
       <div class="container">
@@ -251,11 +243,9 @@
       </div>
     </section>
   </div>
-
   <!-- Modal -->
   <div id="contactModal" class="modal-backdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
-
       <!-- Only FORM has header -->
       <div id="formContainer">
         <header>
@@ -270,27 +260,24 @@
               <input id="name" name="name" type="text" autocomplete="name" required />
               <p class="error">Please enter your name.</p>
             </div>
-
             <!-- Email -->
             <div class="group large-gap" id="grp-email">
               <label for="email" class="form-label">Email<span class="required-asterisk">*</span></label>
               <input id="email" name="_replyto" type="email" autocomplete="email" required />
               <p class="error">Enter a valid email address.</p>
             </div>
-
             <!-- Role -->
             <div class="group large-gap" id="grp-role">
               <label class="form-label">I am…<span class="required-asterisk">*</span></label>
               <div class="radio-stack" role="radiogroup" aria-label="I am">
                 <label class="radio-item"><input type="radio" name="role" value="Artist/Band" required> Artist/Band</label>
                 <label class="radio-item"><input type="radio" name="role" value="Label/Manager" required> Label/Manager</label>
-               <label class="radio-item"><input type="radio" name="role" value="Producer/Engineer" required>Producer/Engineer</label>
+                <label class="radio-item"><input type="radio" name="role" value="Producer/Engineer" required>Producer/Engineer</label>
                 <label class="radio-item"><input type="radio" name="role" value="Investor/Partner" required> Investor/Partner</label>
                 <label class="radio-item"><input type="radio" name="role" value="Other" required> Other</label>
               </div>
               <p class="error">Please choose one.</p>
             </div>
-
             <!-- Message -->
             <div class="group large-gap" id="grp-message">
               <label for="message" class="form-label">What brings you here?<span class="required-asterisk">*</span></label>
@@ -298,21 +285,19 @@
               <div class="helper" style="margin-top:6px;"><span id="charLeft">160</span> characters left</div>
               <p class="error">Tell us a bit so we can route your note.</p>
             </div>
-
             <!-- Ref -->
             <div class="group" id="grp-ref">
               <label for="ref" class="form-label">How did you hear about Label Kid?<span class="required-asterisk">*</span></label>
               <select id="ref" name="ref" required>
                 <option value="" disabled selected>Select one</option>
                 <option>Friend</option>
-                                <option>Artist</option>
+                <option>Artist</option>
                 <option>Colleague</option>
                 <option>Collaborator</option>
                 <option>Other</option>
               </select>
               <p class="error">Please select an option.</p>
             </div>
-
             <!-- Consent -->
             <div class="group" id="grp-consent">
               <div class="consent-row">
@@ -321,7 +306,6 @@
               </div>
               <p class="error">Please agree so we can reach you.</p>
             </div>
-
             <!-- Actions -->
             <div class="actions">
               <div class="left">
@@ -335,7 +319,6 @@
           </form>
         </div>
       </div>
-
       <!-- Confirmation/Success window: clean, centered, no header or helper -->
       <div id="successState" class="success-pane" aria-live="polite" aria-atomic="true">
         <div>
@@ -350,7 +333,6 @@
       </div>
     </div>
   </div>
-
   <script>
     // Bind only the landing CTA buttons
     const openBtns = document.querySelectorAll('.js-open-modal');
@@ -367,6 +349,7 @@
     function openModal(){
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden','false');
+      document.body.classList.add('modal-open');    // ADD
       formContainer.style.display='block';
       successState.style.display='none';
       setTimeout(()=>document.getElementById('name')?.focus(),50);
@@ -374,6 +357,7 @@
     function closeModal(){
       modal.classList.remove('is-open');
       modal.setAttribute('aria-hidden','true');
+      document.body.classList.remove('modal-open'); // ADD
     }
 
     openBtns.forEach(btn => btn.addEventListener('click', openModal));
@@ -396,12 +380,10 @@
       ref: document.getElementById('grp-ref'),
       consent: document.getElementById('grp-consent')
     };
-
     function setInvalid(groupEl, invalid){
       if(!groupEl) return;
       groupEl.classList.toggle('invalid', invalid);
     }
-
     function validate(){
       let ok = true;
       const name = form.name.value.trim();
@@ -419,28 +401,22 @@
       setInvalid(groups.consent, !consentOk); ok = ok && consentOk;
       return ok;
     }
-
     form?.addEventListener('input', validate);
     form?.addEventListener('change', validate);
-
     form?.addEventListener('submit', async (e)=>{
       e.preventDefault();
-
       if(!validate()){
         const firstInvalid = document.querySelector('.invalid input, .invalid textarea, .invalid select');
         firstInvalid?.focus();
         return;
       }
-
       submitBtn.disabled = true; submitBtn.textContent = 'Sending…';
       try{
         const fd = new FormData(form);
         const role = form.querySelector('input[name="role"]:checked')?.value || '';
         fd.append('role', role);
-
         const res = await fetch(form.action,{ method:'POST', body:fd });
         const json = await res.json().catch(()=>({}));
-
         if(res.ok && json.ok){
           form.style.display='none';
           formContainer.style.display='none';
@@ -458,7 +434,6 @@
         window.gtag && gtag('event','contact_submit_network_error');
       }
     });
-
     closeSuccess?.addEventListener('click', ()=>{
       form.reset();
       Object.values(groups).forEach(g => g.classList.remove('invalid'));
